@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>পাইথন সম্পূর্ণ চিট শিট — ইন্টারেক্টিভ ই-বুক</title>
+<style>
+/* ========================= THEME TOKENS ========================= */
+:root{
+  --font-bn: 'Hind Siliguri','Noto Sans Bengali',system-ui,sans-serif;
+  --font-code: 'Fira Code','Consolas','SF Mono',monospace;
+
+  --bg: #ffffff;
+  --bg-elevated: #f6f7f9;
+  --sidebar-bg: #fafbfc;
+  --text: #1c1e21;
+  --text-dim: #5b6270;
+  --border: #e4e7eb;
+  --accent: #2b6cb0;
+  --accent-soft: #e8f1fb;
+  --code-bg: #f4f6f8;
+  --code-text: #1f2937;
+  --code-border: #e2e5ea;
+  --scroll-thumb: #c7cbd1;
+  --shadow: 0 2px 14px rgba(20,20,30,.06);
+  --active-bg: #e8f1fb;
+  --tag-bg: #eef2f7;
+
+  --content-max: 74ch;
+  --base-fs: 17px;
+}
+
+:root[data-theme="dark"]{
+  --bg:#14161a;
+  --bg-elevated:#1b1e24;
+  --sidebar-bg:#101216;
+  --text:#e7e9ec;
+  --text-dim:#9aa1ad;
+  --border:#2a2d34;
+  --accent:#6ea8e5;
+  --accent-soft:#1c2a3a;
+  --code-bg:#1c1f26;
+  --code-text:#dbe2ea;
+  --code-border:#2b2f38;
+  --scroll-thumb:#383c44;
+  --shadow: 0 2px 20px rgba(0,0,0,.4);
+  --active-bg:#1c2a3a;
+  --tag-bg:#20242b;
+}
+
+:root[data-theme="sepia"]{
+  --bg:#f4ecd8;
+  --bg-elevated:#ece1c8;
+  --sidebar-bg:#eee3c9;
+  --text:#3a2f22;
+  --text-dim:#7a6a52;
+  --border:#ddccaa;
+  --accent:#8a5a2b;
+  --accent-soft:#e9dcb8;
+  --code-bg:#ece0c3;
+  --code-text:#3a2f22;
+  --code-border:#ddccaa;
+  --scroll-thumb:#cdb98e;
+  --shadow: 0 2px 14px rgba(80,60,20,.10);
+  --active-bg:#e3d4a8;
+  --tag-bg:#e6d8b0;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]):not([data-theme="sepia"]){
+    --bg:#14161a; --bg-elevated:#1b1e24; --sidebar-bg:#101216; --text:#e7e9ec;
+    --text-dim:#9aa1ad; --border:#2a2d34; --accent:#6ea8e5; --accent-soft:#1c2a3a;
+    --code-bg:#1c1f26; --code-text:#dbe2ea; --code-border:#2b2f38; --scroll-thumb:#383c44;
+    --shadow: 0 2px 20px rgba(0,0,0,.4); --active-bg:#1c2a3a; --tag-bg:#20242b;
+  }
+}
+
+*{box-sizing:border-box;}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top: calc(64px + env(safe-area-inset-top,0px));
+}
+body{
+  margin:0;
+  font-family: var(--font-bn);
+  background:var(--bg);
+  color:var(--text);
+  font-size: var(--base-fs);
+  line-height:1.85;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+  transition: background .2s ease, color .2s ease;
+}
+
+/* ========================= TOP BAR ========================= */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:.5rem;
+  padding: .6rem .8rem;
+  padding-top: calc(.6rem + env(safe-area-inset-top,0px));
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.topbar .brand{
+  font-weight:700; font-size:1rem; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+  flex:1;
+}
+.icon-btn{
+  border:1px solid var(--border);
+  background:var(--bg-elevated);
+  color:var(--text);
+  width:38px; height:38px;
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  font-size:1rem;
+  flex-shrink:0;
+  -webkit-tap-highlight-color: transparent;
+}
+.icon-btn:active{ transform: scale(.94); }
+.icon-btn.active{ background:var(--active-bg); border-color:var(--accent); color:var(--accent); }
+
+.controls-pop{
+  position:fixed;
+  top: calc(58px + env(safe-area-inset-top,0px));
+  right:.8rem;
+  background:var(--bg-elevated);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow: var(--shadow);
+  padding: .9rem;
+  z-index:60;
+  width:min(280px, 86vw);
+  display:none;
+  flex-direction:column;
+  gap:.8rem;
+}
+.controls-pop.open{ display:flex; }
+.controls-row{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; }
+.controls-row .label{ font-size:.88rem; color:var(--text-dim); }
+.seg{ display:flex; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.seg button{
+  border:none; background:var(--bg); color:var(--text);
+  padding:.4rem .65rem; font-family:var(--font-bn); font-size:.85rem; cursor:pointer;
+}
+.seg button + button{ border-left:1px solid var(--border); }
+.seg button.active{ background:var(--accent); color:#fff; }
+.fs-ctrl{ display:flex; align-items:center; gap:.5rem; }
+.fs-ctrl button{
+  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+  background:var(--bg); color:var(--text); font-size:1rem; cursor:pointer;
+}
+.fs-ctrl .fs-val{ min-width:2.6em; text-align:center; font-size:.85rem; color:var(--text-dim); }
+
+/* ========================= LAYOUT ========================= */
+.app{
+  display:flex;
+  min-height: calc(100vh - 58px);
+}
+
+/* Sidebar / TOC */
+.sidebar{
+  width:280px; flex-shrink:0;
+  background:var(--sidebar-bg);
+  border-right:1px solid var(--border);
+  position:sticky;
+  top:58px;
+  height: calc(100vh - 58px);
+  overflow-y:auto;
+  padding: .6rem 0 2rem;
+}
+.sidebar::-webkit-scrollbar{ width:6px; }
+.sidebar::-webkit-scrollbar-thumb{ background:var(--scroll-thumb); border-radius:6px; }
+
+.toc-search{
+  margin: .3rem .8rem .6rem;
+  padding: .5rem .7rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-bn);
+  font-size:.88rem;
+  width: calc(100% - 1.6rem);
+}
+.toc-list{ list-style:none; margin:0; padding:0; }
+.toc-list a{
+  display:block;
+  padding: .5rem .9rem .5rem 1.1rem;
+  color:var(--text-dim);
+  text-decoration:none;
+  font-size:.88rem;
+  border-left:3px solid transparent;
+  line-height:1.4;
+}
+.toc-list a:hover{ background:var(--bg-elevated); color:var(--text); }
+.toc-list a.active{
+  color:var(--accent); background:var(--active-bg);
+  border-left-color:var(--accent); font-weight:600;
+}
+.toc-num{ color:var(--text-dim); margin-inline-end:.4em; font-size:.82em; }
+
+.sidebar-overlay{
+  display:none;
+  position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:40;
+}
+
+/* Main content */
+main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  justify-content:center;
+  padding: 1.2rem 1rem 6rem;
+}
+.content{
+  width:100%;
+  max-width: var(--content-max);
+}
+.reading-mode main{ padding-top: 2rem; }
+.reading-mode .app{ display:block; }
+.reading-mode .content{ max-width: 68ch; margin: 0 auto; }
+
+.progress-wrap{
+  position:sticky; top:58px; z-index:45;
+  height:3px; background:var(--border);
+}
+.progress-bar{ height:100%; width:0%; background:var(--accent); transition:width .1s linear; }
+
+.book-title{
+  text-align:center;
+  padding: 1.4rem 0 2rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:1.6rem;
+}
+.book-title h1{ font-size: clamp(1.3rem, 4vw, 1.8rem); margin:0 0 .4rem; }
+.book-title p{ color:var(--text-dim); font-size:.92rem; margin:0; }
+.book-title .snake{ font-size:2.2rem; }
+
+section.chapter{
+  margin-bottom: 3rem;
+  scroll-margin-top: 72px;
+}
+section.chapter h2{
+  font-size: clamp(1.15rem, 3.4vw, 1.5rem);
+  border-bottom:2px solid var(--accent);
+  padding-bottom:.5rem;
+  margin: 0 0 1rem;
+  display:flex; align-items:baseline; gap:.5rem;
+}
+section.chapter h2 .chnum{
+  color:var(--accent); font-family:var(--font-code); font-size:.85em;
+}
+section.chapter h3{
+  font-size: clamp(1rem, 2.8vw, 1.15rem);
+  margin: 1.6rem 0 .6rem;
+  color:var(--text);
+}
+section.chapter p{ margin:.6rem 0; word-break: break-word; }
+section.chapter ul, section.chapter ol{ padding-inline-start: 1.3em; }
+section.chapter li{ margin:.35rem 0; }
+
+pre{
+  background:var(--code-bg);
+  border:1px solid var(--code-border);
+  border-radius:10px;
+  padding: .9rem 1rem;
+  overflow-x:auto;
+  margin: .8rem 0 1.1rem;
+  -webkit-overflow-scrolling: touch;
+  max-width:100%;
+}
+pre code{
+  font-family: var(--font-code);
+  font-size: .85rem;
+  color: var(--code-text);
+  white-space: pre;
+  line-height:1.65;
+}
+code{
+  font-family: var(--font-code);
+  background:var(--code-bg);
+  color:var(--code-text);
+  padding:.1em .35em;
+  border-radius:5px;
+  font-size:.88em;
+  word-break: break-word;
+}
+pre code{ padding:0; background:none; }
+
+.cmt{ color:#7c8a9c; }
+:root[data-theme="dark"] .cmt{ color:#7f8a99; }
+
+table{
+  width:100%; border-collapse:collapse; margin:1rem 0 1.3rem;
+  font-size:.88rem; display:block; overflow-x:auto; white-space:nowrap;
+}
+table th, table td{
+  border:1px solid var(--border); padding:.5rem .7rem; text-align:left;
+}
+table th{ background:var(--bg-elevated); font-weight:600; white-space:nowrap; }
+table td code{ white-space:nowrap; }
+
+.note{
+  background:var(--accent-soft);
+  border-inline-start:4px solid var(--accent);
+  padding:.7rem .9rem; border-radius:8px; margin:1rem 0; font-size:.92rem;
+}
+.tag{
+  display:inline-block; background:var(--tag-bg); color:var(--text-dim);
+  padding:.15em .6em; border-radius:999px; font-size:.75rem; margin-inline-end:.3em;
+}
+
+.chapter-nav{
+  display:flex; justify-content:space-between; gap:.8rem;
+  margin-top: 2.2rem; padding-top:1.2rem; border-top:1px solid var(--border);
+}
+.chapter-nav a{
+  flex:1; text-decoration:none; color:var(--text);
+  border:1px solid var(--border); border-radius:12px;
+  padding:.7rem .9rem; font-size:.85rem;
+  display:flex; flex-direction:column; gap:.15rem;
+  background:var(--bg-elevated);
+}
+.chapter-nav a .dir{ color:var(--text-dim); font-size:.75rem; }
+.chapter-nav a.next{ text-align:right; align-items:flex-end; }
+
+footer.endnote{
+  text-align:center; color:var(--text-dim); font-size:.85rem;
+  padding: 2rem 1rem 3rem;
+}
+
+/* ========================= FAB (mobile TOC trigger already in topbar) ========================= */
+.top-to-btn{
+  position:fixed; bottom: calc(1.1rem + env(safe-area-inset-bottom,0px)); right:1.1rem;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--accent); color:#fff; border:none;
+  box-shadow: var(--shadow); font-size:1.1rem; cursor:pointer;
+  display:none; align-items:center; justify-content:center; z-index:55;
+}
+.top-to-btn.show{ display:flex; }
+
+/* ========================= RESPONSIVE ========================= */
+.toc-toggle{ position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+
+@media (max-width: 900px){
+  .sidebar{
+    position:fixed; top:0; left:0; z-index:41;
+    height:100vh; height:100dvh;
+    padding-top: calc(58px + env(safe-area-inset-top,0px));
+    width: min(300px, 82vw);
+    box-shadow: var(--shadow);
+    transform: translateX(-100%);
+    transition: transform .22s ease;
+  }
+  html.js-ready .sidebar.open,
+  #tocToggle:checked ~ .app .sidebar{ transform: translateX(0); }
+  .sidebar-overlay.show{ display:block; }
+  #tocToggle:checked ~ .sidebar-overlay{ display:block; }
+  .app{ display:block; }
+  main{ padding: 1rem .85rem 6rem; }
+  :root{ --base-fs: 16px; }
+}
+
+@media (min-width: 901px){
+  .menu-btn{ display:none; }
+}
+
+@media (max-width: 480px){
+  .book-title{ padding: 1rem 0 1.4rem; }
+  section.chapter{ margin-bottom: 2.2rem; }
+  pre{ padding:.7rem .8rem; }
+  pre code{ font-size:.78rem; }
+}
+
+::selection{ background: var(--accent); color:#fff; }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="tocToggle" class="toc-toggle" aria-hidden="true">
+
+<div class="topbar">
+  <label class="icon-btn menu-btn" id="menuBtn" for="tocToggle" aria-label="সূচিপত্র">☰</label>
+  <div class="brand">🐍 পাইথন সম্পূর্ণ চিট শিট</div>
+  <button class="icon-btn" id="readingBtn" title="রিডিং মোড">📖</button>
+  <button class="icon-btn" id="settingsBtn" title="সেটিংস">Aa</button>
+</div>
+
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="controls-pop" id="controlsPop">
+  <div class="controls-row">
+    <span class="label">থিম</span>
+    <div class="seg" id="themeSeg">
+      <button data-theme="light">লাইট</button>
+      <button data-theme="dark">ডার্ক</button>
+      <button data-theme="sepia">সেপিয়া</button>
+    </div>
+  </div>
+  <div class="controls-row">
+    <span class="label">লেখার আকার</span>
+    <div class="fs-ctrl">
+      <button id="fsMinus">A−</button>
+      <span class="fs-val" id="fsVal">100%</span>
+      <button id="fsPlus">A+</button>
+    </div>
+  </div>
+  <div class="controls-row">
+    <span class="label">রিডিং মোড (শুধু লেখা)</span>
+    <div class="seg" id="readSeg">
+      <button data-on="0">বন্ধ</button>
+      <button data-on="1">চালু</button>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন..." aria-label="সূচিপত্রে খুঁজুন">
+    <ul class="toc-list" id="tocList">
+      <li><a href="#s1" data-id="s1" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" ><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="#s2" data-id="s2" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট" ><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
+      <li><a href="#s3" data-id="s3" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ" ><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
+      <li><a href="#s4" data-id="s4" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর" ><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
+      <li><a href="#s5" data-id="s5" data-title="০৫ সব ধরনের অপারেটর" ><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
+      <li><a href="#s6" data-id="s6" data-title="০৬ স্ট্রিং (String)" ><span class="toc-num">০৬</span>স্ট্রিং (String)</a></li>
+      <li><a href="#s7" data-id="s7" data-title="০৭ f-String ও স্ট্রিং ফরম্যাটিং" ><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
+      <li><a href="#s8" data-id="s8" data-title="০৮ লিস্ট (List)" ><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
+      <li><a href="#s9" data-id="s9" data-title="০৯ টাপল (Tuple)" ><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
+      <li><a href="#s10" data-id="s10" data-title="১০ সেট (Set)" ><span class="toc-num">১০</span>সেট (Set)</a></li>
+      <li><a href="#s11" data-id="s11" data-title="১১ ডিকশনারি (Dictionary)" ><span class="toc-num">১১</span>ডিকশনারি (Dictionary)</a></li>
+      <li><a href="#s12" data-id="s12" data-title="১২ টাইপ কাস্টিং / কনভার্শন" ><span class="toc-num">১২</span>টাইপ কাস্টিং / কনভার্শন</a></li>
+      <li><a href="#s13" data-id="s13" data-title="১৩ কন্ডিশনাল স্টেটমেন্ট" ><span class="toc-num">১৩</span>কন্ডিশনাল স্টেটমেন্ট</a></li>
+      <li><a href="#s14" data-id="s14" data-title="১৪ লুপ (Loop)" ><span class="toc-num">১৪</span>লুপ (Loop)</a></li>
+      <li><a href="#s15" data-id="s15" data-title="১৫ ফাংশন (Function)" ><span class="toc-num">১৫</span>ফাংশন (Function)</a></li>
+      <li><a href="#s16" data-id="s16" data-title="১৬ Lambda / অ্যানোনিমাস ফাংশন" ><span class="toc-num">১৬</span>Lambda / অ্যানোনিমাস ফাংশন</a></li>
+      <li><a href="#s17" data-id="s17" data-title="১৭ মডিউল ও প্যাকেজ" ><span class="toc-num">১৭</span>মডিউল ও প্যাকেজ</a></li>
+      <li><a href="#s18" data-id="s18" data-title="১৮ ফাইল হ্যান্ডলিং" ><span class="toc-num">১৮</span>ফাইল হ্যান্ডলিং</a></li>
+      <li><a href="#s19" data-id="s19" data-title="১৯ এক্সেপশন হ্যান্ডলিং" ><span class="toc-num">১৯</span>এক্সেপশন হ্যান্ডলিং</a></li>
+      <li><a href="#s20" data-id="s20" data-title="২০ ক্লাস ও অবজেক্ট (OOP)" ><span class="toc-num">২০</span>ক্লাস ও অবজেক্ট (OOP)</a></li>
+      <li><a href="#s21" data-id="s21" data-title="২১ ম্যাজিক / ডান্ডার মেথড" ><span class="toc-num">২১</span>ম্যাজিক / ডান্ডার মেথড</a></li>
+      <li><a href="#s22" data-id="s22" data-title="২২ ইটারেটর ও জেনারেটর" ><span class="toc-num">২২</span>ইটারেটর ও জেনারেটর</a></li>
+      <li><a href="#s23" data-id="s23" data-title="২৩ ডেকোরেটর (Decorator)" ><span class="toc-num">২৩</span>ডেকোরেটর (Decorator)</a></li>
+      <li><a href="#s24" data-id="s24" data-title="২৪ কনটেক্সট ম্যানেজার (with)" ><span class="toc-num">২৪</span>কনটেক্সট ম্যানেজার (with)</a></li>
+      <li><a href="#s25" data-id="s25" data-title="২৫ কম্প্রিহেনশন" ><span class="toc-num">২৫</span>কম্প্রিহেনশন</a></li>
+      <li><a href="#s26" data-id="s26" data-title="২৬ Collections মডিউল" ><span class="toc-num">২৬</span>Collections মডিউল</a></li>
+      <li><a href="#s27" data-id="s27" data-title="২৭ Heapq (হিপ)" ><span class="toc-num">২৭</span>Heapq (হিপ)</a></li>
+      <li><a href="#s28" data-id="s28" data-title="২৮ Stack ও Queue" ><span class="toc-num">২৮</span>Stack ও Queue</a></li>
+      <li><a href="#s29" data-id="s29" data-title="২৯ রেগুলার এক্সপ্রেশন (re)" ><span class="toc-num">২৯</span>রেগুলার এক্সপ্রেশন (re)</a></li>
+      <li><a href="#s30" data-id="s30" data-title="৩০ তারিখ ও সময় (datetime)" ><span class="toc-num">৩০</span>তারিখ ও সময় (datetime)</a></li>
+      <li><a href="#s31" data-id="s31" data-title="৩১ ফাংশনাল প্রোগ্রামিং" ><span class="toc-num">৩১</span>ফাংশনাল প্রোগ্রামিং</a></li>
+      <li><a href="#s32" data-id="s32" data-title="৩২ টাইপ হিন্টিং" ><span class="toc-num">৩২</span>টাইপ হিন্টিং</a></li>
+      <li><a href="#s33" data-id="s33" data-title="৩৩ মাল্টিথ্রেডিং ও মাল্টিপ্রসেসিং" ><span class="toc-num">৩৩</span>মাল্টিথ্রেডিং ও মাল্টিপ্রসেসিং</a></li>
+      <li><a href="#s34" data-id="s34" data-title="৩৪ Asyncio (async/await)" ><span class="toc-num">৩৪</span>Asyncio (async/await)</a></li>
+      <li><a href="#s35" data-id="s35" data-title="৩৫ পূর্ণাঙ্গ স্ট্যান্ডার্ড লাইব্রেরি" ><span class="toc-num">৩৫</span>পূর্ণাঙ্গ স্ট্যান্ডার্ড লাইব্রেরি</a></li>
+      <li><a href="#s36" data-id="s36" data-title="৩৬ Virtual Environment ও pip" ><span class="toc-num">৩৬</span>Virtual Environment ও pip</a></li>
+      <li><a href="#s37" data-id="s37" data-title="৩৭ ইউনিট টেস্টিং" ><span class="toc-num">৩৭</span>ইউনিট টেস্টিং</a></li>
+      <li><a href="#s38" data-id="s38" data-title="৩৮ ডিবাগিং প্র্যাকটিস" ><span class="toc-num">৩৮</span>ডিবাগিং প্র্যাকটিস</a></li>
+      <li><a href="#s39" data-id="s39" data-title="৩৯ PEP 8 কোডিং স্টাইল গাইড" ><span class="toc-num">৩৯</span>PEP 8 কোডিং স্টাইল গাইড</a></li>
+      <li><a href="#s40" data-id="s40" data-title="৪০ বিবিধ (Miscellaneous)" ><span class="toc-num">৪০</span>বিবিধ (Miscellaneous)</a></li>
+      <li><a href="#s41" data-id="s41" data-title="৪১ কুইক রেফারেন্স টেবিল" ><span class="toc-num">৪১</span>কুইক রেফারেন্স টেবিল</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="content" id="content">
+
+      <div class="book-title">
+        <div class="snake">🐍</div>
+        <h1>পাইথন সম্পূর্ণ চিট শিট</h1>
+        <p>Python 3.x — একদম শুরু থেকে অ্যাডভান্সড লেভল পর্যন্ত সম্পূর্ণ, বিস্তারিত ও হালনাগাদ বাংলা রেফারেন্স গাইড।<br>কোড ইংরেজিতে (স্ট্যান্ডার্ড), ব্যাখ্যা সম্পূর্ণ বাংলায়।</p>
+      </div>
+
+<section class="chapter" id="s1">
+<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
+<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
+<h3>Hello World</h3>
+<pre><code>print("Hello, World!")</code></pre>
+<h3>পাইথন রান করা</h3>
+<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
+python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
+python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
+<h3>পাইথনের বৈশিষ্ট্য</h3>
+<ul>
+<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
+<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
+<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
+<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
+</ul>
+</section>
+
+<section class="chapter" id="s2">
+<h2><span class="chnum">০২</span> কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</h2>
+<h3>কমেন্ট</h3>
+<pre><code><span class="cmt"># এটি একটি সিঙ্গেল-লাইন কমেন্ট</span>
+
+"""
+এটি মাল্টি-লাইন স্ট্রিং, প্রায়ই ডকস্ট্রিং/কমেন্ট হিসেবে ব্যবহৃত হয়
+তিন ডাবল কোট (""") দিয়ে লেখা হয়
+"""
+
+'''
+তিন সিঙ্গেল কোট (''') দিয়েও মাল্টি-লাইন স্ট্রিং লেখা যায়
+'''</code></pre>
+<h3>ইন্ডেন্টেশন</h3>
+<p>পাইথনে কোড ব্লক (if, for, function ইত্যাদির ভেতরের কোড) নির্ধারণ হয় ইন্ডেন্টেশন (স্পেস/ট্যাব) দিয়ে — কার্লি ব্রেস <code>{}</code> লাগে না। সাধারণত ৪ স্পেস ব্যবহার করা হয়।</p>
+<pre><code>if True:
+    print("এই লাইন if ব্লকের ভেতরে")
+    print("এটাও")
+print("এটা if ব্লকের বাইরে")</code></pre>
+<h3>print() ফাংশন</h3>
+<pre><code>print("Hello", "World")                    <span class="cmt"># আউটপুট: Hello World</span>
+print("Hello", "World", sep="-")            <span class="cmt"># আউটপুট: Hello-World</span>
+print("Hello", end=" ")                     <span class="cmt"># নতুন লাইনে যাবে না, স্পেস দিয়ে শেষ হবে</span>
+print("A", "B", "C", sep=", ", end="!\n")   <span class="cmt"># আউটপুট: A, B, C!</span></code></pre>
+<h3>input() ফাংশন</h3>
+<pre><code>name = input("তোমার নাম লেখো: ")      <span class="cmt"># ইউজার থেকে ইনপুট নেয়, সবসময় string রিটার্ন করে</span>
+age = int(input("বয়স লেখো: "))        <span class="cmt"># সংখ্যা নিতে হলে int()/float() দিয়ে কনভার্ট করতে হয়</span></code></pre>
+</section>
+
+<section class="chapter" id="s3">
+<h2><span class="chnum">০৩</span> ভ্যারিয়েবল ও ডেটা টাইপ</h2>
+<p>পাইথনে ভ্যারিয়েবল ঘোষণার জন্য কোনো কীওয়ার্ড (var/let) লাগে না — সরাসরি অ্যাসাইন করলেই ভ্যারিয়েবল তৈরি হয়।</p>
+<pre><code>age = 18        <span class="cmt"># age এখন int টাইপের</span>
+name = "mahim"   <span class="cmt"># name এখন str টাইপের</span>
+print(name)
+
+x = y = z = 10     <span class="cmt"># মাল্টিপল অ্যাসাইনমেন্ট — সবাইকে একই ভ্যালু</span>
+a, b, c = 1, 2, 3  <span class="cmt"># একসাথে একাধিক ভ্যারিয়েবল অ্যাসাইন</span>
+a, b = b, a        <span class="cmt"># দুই ভ্যারিয়েবলের ভ্যালু অদল-বদল (swap), temp দরকার নেই</span></code></pre>
+<h3>পাইথনের বিল্ট-ইন ডেটা টাইপ</h3>
+<table>
+<tr><th>ক্যাটাগরি</th><th>টাইপ</th><th>উদাহরণ</th></tr>
+<tr><td>টেক্সট</td><td><code>str</code></td><td><code>"hello"</code></td></tr>
+<tr><td>সংখ্যা (Numeric)</td><td><code>int</code>, <code>float</code>, <code>complex</code></td><td><code>10</code>, <code>2.5</code>, <code>3+4j</code></td></tr>
+<tr><td>সিকুয়েন্স</td><td><code>list</code>, <code>tuple</code>, <code>range</code></td><td><code>[1,2]</code>, <code>(1,2)</code>, <code>range(5)</code></td></tr>
+<tr><td>ম্যাপিং</td><td><code>dict</code></td><td><code>{"a": 1}</code></td></tr>
+<tr><td>সেট</td><td><code>set</code>, <code>frozenset</code></td><td><code>{1,2}</code></td></tr>
+<tr><td>বুলিয়ান</td><td><code>bool</code></td><td><code>True</code>, <code>False</code></td></tr>
+<tr><td>বাইনারি</td><td><code>bytes</code>, <code>bytearray</code></td><td><code>b"abc"</code></td></tr>
+<tr><td>None</td><td><code>NoneType</code></td><td><code>None</code></td></tr>
+</table>
+<h3>ডেটা টাইপ চেক করা</h3>
+<pre><code>x = 10
+print(type(x))              <span class="cmt"># &lt;class 'int'&gt;</span>
+print(isinstance(x, int))   <span class="cmt"># True</span></code></pre>
+<h3>ভ্যারিয়েবল নেমিং নিয়ম</h3>
+<ul>
+<li>অক্ষর, সংখ্যা, আন্ডারস্কোর (<code>_</code>) দিয়ে নাম হতে পারে, কিন্তু সংখ্যা দিয়ে শুরু করা যাবে না।</li>
+<li>কেস-সেনসিটিভ: <code>age</code> এবং <code>Age</code> আলাদা ভ্যারিয়েবল।</li>
+<li>পাইথন কীওয়ার্ড (if, for, class ইত্যাদি) ভ্যারিয়েবলের নাম হিসেবে ব্যবহার করা যাবে না।</li>
+<li>কনভেনশন: ভ্যারিয়েবল/ফাংশনের জন্য <code>snake_case</code>, ক্লাসের জন্য <code>PascalCase</code>, কনস্ট্যান্টের জন্য <code>UPPER_CASE</code>।</li>
+</ul>
+<h3>Global ও Local ভ্যারিয়েবল</h3>
+<pre><code>x = "global"
+def my_func():
+    x = "local"   <span class="cmt"># ফাংশনের ভেতরে এটা আলাদা লোকাল ভ্যারিয়েবল</span>
+    print(x)      <span class="cmt"># local</span>
+
+my_func()
+print(x)   <span class="cmt"># global</span></code></pre>
+</section>
+
+<section class="chapter" id="s4">
+<h2><span class="chnum">০৪</span> সংখ্যা ও গাণিতিক অপারেটর</h2>
+<pre><code>x = 1     <span class="cmt"># int</span>
+y = 2.8   <span class="cmt"># float</span>
+z = 1j    <span class="cmt"># complex</span>
+print(type(x))   <span class="cmt"># &lt;class 'int'&gt;</span></code></pre>
+<h3>গাণিতিক অপারেটর</h3>
+<table>
+<tr><th>অপারেটর</th><th>কাজ</th><th>উদাহরণ</th><th>ফলাফল</th></tr>
+<tr><td><code>+</code></td><td>যোগ</td><td><code>10 + 30</code></td><td>40</td></tr>
+<tr><td><code>-</code></td><td>বিয়োগ</td><td><code>40 - 10</code></td><td>30</td></tr>
+<tr><td><code>*</code></td><td>গুণ</td><td><code>50 * 5</code></td><td>250</td></tr>
+<tr><td><code>/</code></td><td>ভাগ (float)</td><td><code>16 / 4</code></td><td>4.0</td></tr>
+<tr><td><code>//</code></td><td>ফ্লোর ডিভিশন</td><td><code>16 // 4</code></td><td>4</td></tr>
+<tr><td><code>%</code></td><td>মডুলাস (ভাগশেষ)</td><td><code>25 % 2</code></td><td>1</td></tr>
+<tr><td><code>**</code></td><td>পাওয়ার</td><td><code>5 ** 3</code></td><td>125</td></tr>
+</table>
+<pre><code>result = -7 // 2   <span class="cmt"># => -4 (ফ্লোর ডিভিশন নেগেটিভ ইনফিনিটির দিকে রাউন্ড করে)</span></code></pre>
+<h3>শর্টহ্যান্ড অ্যাসাইনমেন্ট অপারেটর</h3>
+<pre><code>counter = 0
+counter += 10   <span class="cmt"># counter = counter + 10  =&gt; 10</span>
+counter -= 5    <span class="cmt"># =&gt; 5</span>
+counter *= 2    <span class="cmt"># =&gt; 10</span>
+counter /= 2    <span class="cmt"># =&gt; 5.0</span>
+counter //= 2   <span class="cmt"># =&gt; 2.0</span>
+counter **= 3   <span class="cmt"># =&gt; 8.0</span>
+counter %= 3    <span class="cmt"># =&gt; 2.0</span></code></pre>
+<h3>অপারেটর প্রিসিডেন্স</h3>
+<p>উপরের দিকে থাকা অপারেটর আগে হিসাব হয়: <code>()</code> → <code>**</code> → <code>* / // %</code> → <code>+ -</code> → তুলনা অপারেটর → <code>not</code> → <code>and</code> → <code>or</code></p>
+<h3>দরকারি সংখ্যা ফাংশন</h3>
+<pre><code>abs(-5)          <span class="cmt"># =&gt; 5, পরম মান</span>
+round(3.567, 2)  <span class="cmt"># =&gt; 3.57, রাউন্ডিং</span>
+pow(2, 3)        <span class="cmt"># =&gt; 8</span>
+max(3, 7, 2)     <span class="cmt"># =&gt; 7</span>
+min(3, 7, 2)     <span class="cmt"># =&gt; 2</span>
+sum([1, 2, 3])   <span class="cmt"># =&gt; 6</span>
+divmod(16, 4)    <span class="cmt"># =&gt; (4, 0)</span></code></pre>
+</section>
+
+<section class="chapter" id="s5">
+<h2><span class="chnum">০৫</span> সব ধরনের অপারেটর</h2>
+<h3>৫.১ তুলনা অপারেটর — ফলাফল সবসময় bool</h3>
+<pre><code>print(5 == 5)       <span class="cmt"># True</span>
+print(5 != 3)       <span class="cmt"># True</span>
+print(3 &lt; 1 &lt; 5)    <span class="cmt"># True — চেইনড কম্পারিজন</span></code></pre>
+<h3>৫.২ লজিক্যাল অপারেটর</h3>
+<pre><code>print(True and False)   <span class="cmt"># False</span>
+print(True or False)    <span class="cmt"># True</span>
+print(not True)         <span class="cmt"># False</span></code></pre>
+<h3>৫.৩ বিটওয়াইজ অপারেটর</h3>
+<table>
+<tr><th>অপারেটর</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>&amp;</code></td><td>AND</td><td><code>5 &amp; 3 =&gt; 1</code></td></tr>
+<tr><td><code>|</code></td><td>OR</td><td><code>5 | 3 =&gt; 7</code></td></tr>
+<tr><td><code>^</code></td><td>XOR</td><td><code>5 ^ 3 =&gt; 6</code></td></tr>
+<tr><td><code>~</code></td><td>NOT</td><td><code>~5 =&gt; -6</code></td></tr>
+<tr><td><code>&lt;&lt;</code></td><td>লেফট শিফট</td><td><code>5 &lt;&lt; 1 =&gt; 10</code></td></tr>
+<tr><td><code>&gt;&gt;</code></td><td>রাইট শিফট</td><td><code>5 &gt;&gt; 1 =&gt; 2</code></td></tr>
+</table>
+<h3>৫.৪ আইডেন্টিটি অপারেটর</h3>
+<p><code>is</code> ও <code>is not</code> দুই ভ্যারিয়েবল একই মেমোরি লোকেশনে আছে কিনা তা চেক করে (ভ্যালু সমান কিনা তা <code>==</code> চেক করে)।</p>
+<pre><code>a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a == b)       <span class="cmt"># True (ভ্যালু সমান)</span>
+print(a is b)       <span class="cmt"># False (আলাদা অবজেক্ট)</span>
+print(a is c)       <span class="cmt"># True (একই অবজেক্ট)</span></code></pre>
+<h3>৫.৫ মেম্বারশিপ অপারেটর</h3>
+<pre><code>s = 'spam'
+print(s in 'I saw spamalot!')       <span class="cmt"># True</span>
+print(3 in [1, 2, 3])               <span class="cmt"># True</span>
+print('a' in {'a': 1, 'b': 2})      <span class="cmt"># True — dict-এ key চেক করে</span></code></pre>
+<h3>৫.৬ ওয়ালরাস অপারেটর <code>:=</code> (Python 3.8+)</h3>
+<pre><code>if (n := len([1, 2, 3, 4])) &gt; 3:
+    print(f"লিস্টের সাইজ {n}, যা 3 এর চেয়ে বড়")</code></pre>
+</section>
+
+<section class="chapter" id="s6">
+<h2><span class="chnum">০৬</span> স্ট্রিং (String)</h2>
+<pre><code>hello = "Hello World"
+hello = 'Hello World'   <span class="cmt"># সিঙ্গেল বা ডাবল কোট — দুটোই বৈধ</span>
+
+multi = """Multiline
+Lorem ipsum dolor sit amet"""</code></pre>
+<h3>ইনডেক্সিং</h3>
+<pre><code>hello = "Hello, World"
+print(hello[1])    <span class="cmt"># 'e'</span>
+print(hello[-1])   <span class="cmt"># 'd' (শেষ থেকে গোনা)</span></code></pre>
+<h3>স্লাইসিং — <code>s[start:end:step]</code></h3>
+<pre><code>s = 'mybacon'
+print(s[2:5])    <span class="cmt"># 'bac'</span>
+print(s[:2])     <span class="cmt"># 'my'</span>
+print(s[2:])     <span class="cmt"># 'bacon'</span>
+print(s[-5:-1])  <span class="cmt"># 'baco'</span>
+print(s[::-1])   <span class="cmt"># স্ট্রিং রিভার্স করা</span></code></pre>
+<h3>দৈর্ঘ্য, যোগ ও পুনরাবৃত্তি</h3>
+<pre><code>print(len("Hello, World!"))   <span class="cmt"># 13</span>
+print('spam' + 'egg')         <span class="cmt"># 'spamegg'</span>
+print('=' * 8)                <span class="cmt"># '========'</span></code></pre>
+<h3>স্ট্রিং-এর গুরুত্বপূর্ণ মেথড</h3>
+<table>
+<tr><th>মেথড</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>.upper()</code></td><td>সব বড় হাতের অক্ষরে</td><td>"abc".upper() → "ABC"</td></tr>
+<tr><td><code>.lower()</code></td><td>সব ছোট হাতের অক্ষরে</td><td>"ABC".lower() → "abc"</td></tr>
+<tr><td><code>.title()</code></td><td>প্রতি শব্দের প্রথম অক্ষর বড়</td><td>"hi there" → "Hi There"</td></tr>
+<tr><td><code>.strip()</code></td><td>দুই পাশের স্পেস মুছে</td><td>" hi ".strip() → "hi"</td></tr>
+<tr><td><code>.replace(a,b)</code></td><td>a কে b দিয়ে রিপ্লেস</td><td>"aa".replace("a","b") → "bb"</td></tr>
+<tr><td><code>.split(sep)</code></td><td>সেপারেটর দিয়ে ভাগ করে লিস্ট বানায়</td><td>"a,b".split(",") → ["a","b"]</td></tr>
+<tr><td><code>.join(iter)</code></td><td>লিস্টকে স্ট্রিং-এ জোড়ে</td><td>",".join(["a","b"]) → "a,b"</td></tr>
+<tr><td><code>.find(sub)</code></td><td>সাবস্ট্রিং-এর ইনডেক্স (না পেলে -1)</td><td>"hello".find("l") → 2</td></tr>
+<tr><td><code>.count(sub)</code></td><td>কতবার আছে গোনে</td><td>"aaa".count("a") → 3</td></tr>
+<tr><td><code>.startswith(x)</code></td><td>শুরু হয় কিনা</td><td>True/False</td></tr>
+<tr><td><code>.isdigit()</code></td><td>শুধু ডিজিট কিনা</td><td>True/False</td></tr>
+<tr><td><code>.zfill(n)</code></td><td>সামনে ০ দিয়ে ভরে</td><td>"7".zfill(3) → "007"</td></tr>
+</table>
+<div class="note">স্ট্রিং <b>immutable</b> — একবার তৈরি হলে এর ভেতরের ভ্যালু বদলানো যায় না। নতুন স্ট্রিং বানাতে হয়: <code>s = "H" + s[1:]</code></div>
+</section>
+
+<section class="chapter" id="s7">
+<h2><span class="chnum">০৭</span> f-String ও স্ট্রিং ফরম্যাটিং</h2>
+<h3>পুরনো % ফরম্যাটিং</h3>
+<pre><code>name, age = "mahim", 23
+print("%s is %d years old." % (name, age))   <span class="cmt"># mahim is 23 years old.</span></code></pre>
+<h3>f-String (Python 3.6+) — সবচেয়ে আধুনিক পদ্ধতি</h3>
+<pre><code>website = 'Google.com'
+print(f"Hello, {website}")            <span class="cmt"># "Hello, Google.com"</span>
+
+num = 10
+print(f'{num} + 10 = {num + 10}')     <span class="cmt"># '10 + 10 = 20' — ভেতরে এক্সপ্রেশনও চলে</span></code></pre>
+<h3>f-String Fill / Align</h3>
+<pre><code>print(f'{"test":*&gt;10}')   <span class="cmt"># '******test' — ডানে অ্যালাইন</span>
+print(f'{"test":*&lt;10}')   <span class="cmt"># 'test******' — বামে অ্যালাইন</span>
+print(f'{"test":*^10}')   <span class="cmt"># '***test***' — মাঝে অ্যালাইন</span>
+print(f'{12345:0&gt;10}')    <span class="cmt"># '0000012345'</span></code></pre>
+<h3>নাম্বার বেস ও ফরম্যাট</h3>
+<pre><code>print(f'{10:b}')     <span class="cmt"># '1010' — বাইনারি</span>
+print(f'{200:x}')    <span class="cmt"># 'c8' — হেক্সাডেসিমেল</span>
+print(f'{65:c}')     <span class="cmt"># 'A' — ASCII কোড থেকে ক্যারেক্টার</span></code></pre>
+<h3>Precision, Grouping, Percentage, Sign</h3>
+<pre><code>import math
+print(f'{math.pi:.2f}')      <span class="cmt"># '3.14'</span>
+print(f'{1000000:,.2f}')     <span class="cmt"># '1,000,000.00'</span>
+print(f'{0.25:.0%}')         <span class="cmt"># '25%'</span>
+print(f'{12345:+}')          <span class="cmt"># '+12345'</span></code></pre>
+</section>
+
+<section class="chapter" id="s8">
+<h2><span class="chnum">০৮</span> লিস্ট (List)</h2>
+<p>লিস্ট হলো অর্ডারড, মিউটেবল (পরিবর্তনযোগ্য) এবং ডুপ্লিকেট ভ্যালু রাখা যায় এমন একটি কালেকশন।</p>
+<pre><code>li1 = []                       <span class="cmt"># খালি লিস্ট</span>
+li2 = [4, 5, 6]
+li3 = list((1, 2, 3))          <span class="cmt"># টাপল থেকে লিস্ট</span>
+li4 = list(range(1, 11))       <span class="cmt"># =&gt; [1, 2, ..., 10]</span></code></pre>
+<h3>অ্যাক্সেস, ইনডেক্সিং ও স্লাইসিং</h3>
+<pre><code>a = ['spam', 'egg', 'bacon', 'tomato', 'ham', 'lobster']
+print(a[2:5])    <span class="cmt"># ['bacon', 'tomato', 'ham']</span>
+print(a[::2])    <span class="cmt"># প্রতি ২ পদক্ষেপে</span>
+print(a[::-1])   <span class="cmt"># রিভার্স লিস্ট</span></code></pre>
+<h3>লিস্টের মেথডসমূহ</h3>
+<table>
+<tr><th>মেথড</th><th>কাজ</th></tr>
+<tr><td><code>.append(x)</code></td><td>শেষে একটি আইটেম যোগ করে</td></tr>
+<tr><td><code>.extend(iter)</code></td><td>আরেকটি iterable-এর সব আইটেম শেষে যোগ করে</td></tr>
+<tr><td><code>.insert(i, x)</code></td><td>নির্দিষ্ট ইনডেক্সে আইটেম বসায়</td></tr>
+<tr><td><code>.remove(x)</code></td><td>প্রথম যে x পাবে সেটা মুছে</td></tr>
+<tr><td><code>.pop(i)</code></td><td>নির্দিষ্ট ইনডেক্সের আইটেম মুছে ও রিটার্ন করে</td></tr>
+<tr><td><code>.sort()</code> / <code>.reverse()</code></td><td>ইন-প্লেস সর্ট / উল্টানো</td></tr>
+<tr><td><code>.index(x)</code> / <code>.count(x)</code></td><td>প্রথম ইনডেক্স / কতবার আছে</td></tr>
+<tr><td><code>.copy()</code></td><td>শ্যালো কপি বানায়</td></tr>
+</table>
+<pre><code>li = [3, 1, 3, 2, 5]
+li.sort()
+print(li)              <span class="cmt"># [1, 2, 3, 3, 5]</span>
+
+odd = [1, 3, 5]
+odd.extend([9, 11, 13])   <span class="cmt"># [1, 3, 5, 9, 11, 13]</span></code></pre>
+<h3>sorted() বনাম .sort()</h3>
+<pre><code>li = [3, 1, 2]
+new_li = sorted(li)   <span class="cmt"># নতুন সর্টেড লিস্ট রিটার্ন করে, মূল li অপরিবর্তিত থাকে</span>
+li.sort()              <span class="cmt"># মূল লিস্টকেই সর্ট করে ফেলে (in-place), None রিটার্ন করে</span>
+
+words = ["banana", "kiwi", "apple"]
+words.sort(key=len)    <span class="cmt"># দৈর্ঘ্য অনুসারে সর্ট</span></code></pre>
+<h3>ফিল্টার ও কম্প্রিহেনশন দিয়ে লিস্ট জেনারেট</h3>
+<pre><code>print(list(filter(lambda x: x % 2 == 1, range(1, 20))))
+print([x ** 2 for x in range(1, 11) if x % 2 == 1])   <span class="cmt"># [1, 9, 25, 49, 81]</span></code></pre>
+<h3>নেস্টেড লিস্ট (Matrix)</h3>
+<pre><code>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(matrix[1][2])   <span class="cmt"># 6</span>
+
+grid = [[0] * 3 for _ in range(3)]   <span class="cmt"># সঠিক উপায়ে 2D লিস্ট তৈরি</span></code></pre>
+<h3>শ্যালো বনাম ডিপ কপি</h3>
+<pre><code>import copy
+a = [1, [2, 3]]
+b = a                    <span class="cmt"># একই অবজেক্ট, b বদলালে a-ও বদলায়</span>
+c = a.copy()              <span class="cmt"># শ্যালো কপি — ভেতরের লিস্ট এখনও শেয়ার্ড</span>
+d = copy.deepcopy(a)      <span class="cmt"># ডিপ কপি — সবকিছু সম্পূর্ণ আলাদা</span></code></pre>
+</section>
+
+<section class="chapter" id="s9">
+<h2><span class="chnum">০৯</span> টাপল (Tuple)</h2>
+<p>টাপল লিস্টের মতোই, কিন্তু <b>ইমিউটেবল</b> (অপরিবর্তনযোগ্য) — একবার তৈরি হলে এর ভেতরের ভ্যালু বদলানো যায় না।</p>
+<pre><code>my_tuple = (1, 2, 3)
+single = (5,)   <span class="cmt"># একমাত্র আইটেমের টাপল হলে কমা লাগবে, নাহলে এটা int হয়ে যাবে</span></code></pre>
+<h3>টাপল আনপ্যাকিং</h3>
+<pre><code>point = (1, 2, 3)
+x, y, z = point
+a, *rest = (1, 2, 3, 4)   <span class="cmt"># a=1, rest=[2, 3, 4]</span></code></pre>
+<h3>কেন টাপল ব্যবহার করবেন</h3>
+<ul>
+<li>ইমিউটেবল হওয়ায় ডেটা প্রোটেক্টেড থাকে, ভুলে বদলে যাওয়ার সুযোগ থাকে না।</li>
+<li>লিস্টের তুলনায় সামান্য দ্রুত ও কম মেমোরি লাগে।</li>
+<li>ডিকশনারির key হিসেবে ব্যবহার করা যায় (লিস্ট করা যায় না)।</li>
+</ul>
+<pre><code>locations = {(0, 0): "origin", (1, 1): "point A"}</code></pre>
+<h3>namedtuple</h3>
+<pre><code>from collections import namedtuple
+Point = namedtuple("Point", ["x", "y"])
+p = Point(3, 4)
+print(p.x, p.y)   <span class="cmt"># 3 4</span></code></pre>
+</section>
+
+<section class="chapter" id="s10">
+<h2><span class="chnum">১০</span> সেট (Set)</h2>
+<p>সেট হলো অর্ডারলেস, ইউনিক (ডুপ্লিকেট-মুক্ত) ভ্যালুর একটি কালেকশন। মিউটেবল, কিন্তু ভেতরের প্রতিটি আইটেমকে হ্যাশেবল হতে হয়।</p>
+<pre><code>set1 = {"a", "b", "c"}
+empty_set = set()   <span class="cmt"># খালি সেট বানাতে {} লেখা যাবে না (তাতে dict হয়ে যাবে)</span></code></pre>
+<h3>সেটের অপারেশন</h3>
+<table>
+<tr><th>মেথড / অপারেটর</th><th>কাজ</th></tr>
+<tr><td><code>.union(s2)</code> / <code>|</code></td><td>দুই সেটের মিলিত সব আইটেম</td></tr>
+<tr><td><code>.intersection(s2)</code> / <code>&amp;</code></td><td>দুই সেটে কমন আইটেম</td></tr>
+<tr><td><code>.difference(s2)</code> / <code>-</code></td><td>প্রথম সেটে আছে, দ্বিতীয়টায় নেই</td></tr>
+<tr><td><code>.symmetric_difference(s2)</code> / <code>^</code></td><td>যা কমন নয়</td></tr>
+</table>
+<pre><code>a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+print(a | b)   <span class="cmt"># {1, 2, 3, 4, 5, 6}</span>
+print(a &amp; b)   <span class="cmt"># {3, 4}</span>
+print(a - b)   <span class="cmt"># {1, 2}</span>
+print(a ^ b)   <span class="cmt"># {1, 2, 5, 6}</span>
+
+s = {1, 2, 2, 3, 3, 3}
+print(s)   <span class="cmt"># {1, 2, 3} — ডুপ্লিকেট অটোমেটিক বাদ যায়</span></code></pre>
+<h3>সেট কম্প্রিহেনশন ও frozenset</h3>
+<pre><code>squares = {x**2 for x in range(6)}
+fs = frozenset({1, 2, 3})   <span class="cmt"># ইমিউটেবল সেট</span></code></pre>
+</section>
+
+<section class="chapter" id="s11">
+<h2><span class="chnum">১১</span> ডিকশনারি (Dictionary)</h2>
+<p>ডিকশনারি হলো key-value পেয়ারের কালেকশন, JSON অবজেক্টের মতো। Python 3.7+ থেকে ডিকশনারি ইনসার্শন-অর্ডার মেনে চলে।</p>
+<pre><code>a = {"one": 1, "two": 2, "three": 3}
+print(a["one"])       <span class="cmt"># 1</span>
+print(a.keys())        <span class="cmt"># dict_keys(['one', 'two', 'three'])</span>
+print(a.values())       <span class="cmt"># dict_values([1, 2, 3])</span>
+print(a.items())        <span class="cmt"># dict_items([...])</span>
+a.update({"four": 4})   <span class="cmt"># নতুন key-value যোগ/আপডেট</span></code></pre>
+<h3>ডিকশনারির মেথড</h3>
+<table>
+<tr><th>মেথড</th><th>কাজ</th></tr>
+<tr><td><code>.get(key, default)</code></td><td>key না থাকলে Error না দিয়ে default রিটার্ন করে</td></tr>
+<tr><td><code>.pop(key)</code></td><td>key মুছে ভ্যালু রিটার্ন করে</td></tr>
+<tr><td><code>.setdefault(key, default)</code></td><td>key থাকলে ভ্যালু দেয়, না থাকলে সেট করে দেয়</td></tr>
+<tr><td><code>.update(dict2)</code></td><td>আরেকটি ডিকশনারির সাথে মার্জ করে</td></tr>
+</table>
+<pre><code>a = {"one": 1, "two": 2}
+print(a.get("three", "নাই"))   <span class="cmt"># 'নাই' — KeyError হবে না</span>
+
+for key, value in a.items():
+    print(key, value)
+
+<span class="cmt"># Python 3.9+: দুটি ডিকশনারি মার্জ করার সহজ পদ্ধতি</span>
+merged = {"a": 1} | {"b": 2}   <span class="cmt"># {'a': 1, 'b': 2}</span></code></pre>
+<h3>ডিকশনারি কম্প্রিহেনশন ও নেস্টেড ডিকশনারি</h3>
+<pre><code>squares = {x: x**2 for x in range(6)}
+inverted = {v: k for k, v in squares.items()}
+
+person = {"name": "mahim", "address": {"city": "Dhaka", "zip": "1200"}}
+print(person["address"]["city"])   <span class="cmt"># 'Dhaka'</span></code></pre>
+</section>
+
+<section class="chapter" id="s12">
+<h2><span class="chnum">১২</span> টাইপ কাস্টিং / কনভার্শন</h2>
+<pre><code><span class="cmt"># Integer-এ কনভার্ট</span>
+int(1)       <span class="cmt"># 1</span>
+int(2.8)     <span class="cmt"># 2 (দশমিক বাদ যায়, রাউন্ড হয় না)</span>
+int("3")     <span class="cmt"># 3</span>
+
+<span class="cmt"># অন্যান্য কনভার্শন</span>
+list("abc")        <span class="cmt"># ['a', 'b', 'c']</span>
+tuple([1, 2, 3])   <span class="cmt"># (1, 2, 3)</span>
+set([1, 1, 2])     <span class="cmt"># {1, 2}</span>
+dict([("a", 1)])   <span class="cmt"># {'a': 1}</span>
+bool(0)            <span class="cmt"># False</span>
+bool("")           <span class="cmt"># False — খালি স্ট্রিং falsy</span></code></pre>
+<h3>Truthy ও Falsy ভ্যালু</h3>
+<p>পাইথনে নিচের ভ্যালুগুলো <b>Falsy</b> (False বলে গণ্য): <code>False</code>, <code>0</code>, <code>0.0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>()</code>, <code>set()</code>, <code>None</code>। এর বাইরে সবকিছু Truthy।</p>
+</section>
+
+<section class="chapter" id="s13">
+<h2><span class="chnum">১৩</span> কন্ডিশনাল স্টেটমেন্ট</h2>
+<h3>if-elif-else</h3>
+<pre><code>num = 5
+if num &gt; 10:
+    print("num is bigger than 10.")
+elif num &lt; 10:
+    print("num is smaller than 10.")
+else:
+    print("num is exactly 10.")</code></pre>
+<h3>ওয়ান-লাইন if (Ternary)</h3>
+<pre><code>a, b = 330, 200
+r = "a" if a &gt; b else "b"
+print(r)   <span class="cmt"># 'a'</span></code></pre>
+<h3>match-case (Python 3.10+)</h3>
+<pre><code>def http_status(code):
+    match code:
+        case 200:
+            return "OK"
+        case 404:
+            return "Not Found"
+        case 500 | 502 | 503:      <span class="cmt"># একাধিক ভ্যালু একসাথে</span>
+            return "Server Error"
+        case _:                    <span class="cmt"># ডিফল্ট কেস</span>
+            return "Unknown"
+
+print(http_status(404))   <span class="cmt"># "Not Found"</span></code></pre>
+</section>
+
+<section class="chapter" id="s14">
+<h2><span class="chnum">১৪</span> লুপ (Loop)</h2>
+<h3>for লুপ ও enumerate()</h3>
+<pre><code>animals = ["dog", "cat", "mouse"]
+for i, value in enumerate(animals):
+    print(i, value)   <span class="cmt"># 0 dog, 1 cat, 2 mouse</span>
+
+for i, value in enumerate(animals, start=1):
+    print(i, value)   <span class="cmt"># 1 dog, 2 cat, 3 mouse</span></code></pre>
+<h3>while লুপ, break ও continue</h3>
+<pre><code>x = 0
+while x &lt; 4:
+    print(x)
+    x += 1
+
+for index in range(10):
+    if index == 5:
+        break       <span class="cmt"># লুপ সম্পূর্ণ বন্ধ করে দেয়</span>
+    print(index)
+
+for index in range(3, 8):
+    if index == 5:
+        continue    <span class="cmt"># এই ইটারেশন স্কিপ করে পরের ধাপে যায়</span>
+    print(index)</code></pre>
+<h3>range() ফাংশন</h3>
+<pre><code>range(4)          <span class="cmt"># 0 1 2 3</span>
+range(4, 8)        <span class="cmt"># 4 5 6 7</span>
+range(4, 10, 2)     <span class="cmt"># 4 6 8 (start, stop, step)</span>
+range(10, 0, -1)    <span class="cmt"># 10 9 8 ... 1 (উল্টো গোনা)</span></code></pre>
+<h3>zip() দিয়ে একাধিক লিস্ট একসাথে লুপ</h3>
+<pre><code>words = ['Mon', 'Tue', 'Wed']
+nums = [1, 2, 3]
+for n, w in zip(nums, words):
+    print(f'{n}:{w}')   <span class="cmt"># 1:Mon 2:Tue 3:Wed</span></code></pre>
+<h3>for/else ও while/else</h3>
+<p>লুপ সম্পূর্ণ শেষ হয়ে গেলে (break ছাড়া) else ব্লক এক্সিকিউট হয়:</p>
+<pre><code>nums = [60, 70, 30, 110, 90]
+for n in nums:
+    if n &gt; 100:
+        print(f"{n} is bigger than 100")
+        break
+else:
+    print("Not found!")   <span class="cmt"># break না হলেই এটা রান হবে</span></code></pre>
+</section>
+
+<section class="chapter" id="s15">
+<h2><span class="chnum">১৫</span> ফাংশন (Function)</h2>
+<pre><code>def hello_world():
+    print('Hello, World!')
+
+hello_world()
+
+def add(x, y):
+    return x + y
+
+result = add(5, 6)   <span class="cmt"># 11</span></code></pre>
+<h3>ডকস্ট্রিং ও ডিফল্ট ভ্যালু আর্গুমেন্ট</h3>
+<pre><code>def square(n):
+    """এই ফাংশন একটি সংখ্যার বর্গ রিটার্ন করে।"""
+    return n * n
+
+def add(x, y=10):
+    return x + y
+
+print(add(5))        <span class="cmt"># 15</span>
+print(add(5, 20))    <span class="cmt"># 25</span></code></pre>
+<h3>*args ও **kwargs</h3>
+<pre><code>def varargs(*args):
+    return args
+print(varargs(1, 2, 3))   <span class="cmt"># (1, 2, 3) — টাপল হিসেবে</span>
+
+def keyword_args(**kwargs):
+    return kwargs
+print(keyword_args(big="foot", loch="ness"))   <span class="cmt"># {'big': 'foot', 'loch': 'ness'}</span>
+
+def full_example(a, b, *args, c=10, **kwargs):
+    print(a, b, args, c, kwargs)
+full_example(1, 2, 3, 4, c=100, x=1, y=2)
+<span class="cmt"># 1 2 (3, 4) 100 {'x': 1, 'y': 2}</span></code></pre>
+<h3>Positional-only ও Keyword-only আর্গুমেন্ট (Python 3.8+)</h3>
+<pre><code>def func(a, b, /, c, d, *, e, f):
+    <span class="cmt"># a, b → শুধু পজিশনাল</span>
+    <span class="cmt"># c, d → পজিশনাল বা কিওয়ার্ড দুভাবেই</span>
+    <span class="cmt"># e, f → শুধু কিওয়ার্ড</span>
+    pass
+
+func(1, 2, 3, d=4, e=5, f=6)   <span class="cmt"># ✅ বৈধ</span></code></pre>
+<h3>রিকার্শন ও ক্লোজার</h3>
+<pre><code>def factorial(n):
+    if n &lt;= 1:
+        return 1
+    return n * factorial(n - 1)
+print(factorial(5))   <span class="cmt"># 120</span>
+
+def outer(x):
+    def inner(y):
+        return x + y   <span class="cmt"># বাইরের ফাংশনের 'x' এখানে অ্যাক্সেস করা যাচ্ছে</span>
+    return inner
+
+add_five = outer(5)
+print(add_five(3))    <span class="cmt"># 8</span></code></pre>
+<h3>global ও nonlocal কীওয়ার্ড</h3>
+<pre><code>counter = 0
+def increment():
+    global counter
+    counter += 1
+
+def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        x += 1
+    inner()
+    return x
+print(outer())   <span class="cmt"># 11</span></code></pre>
+<h3>টাইপ হিন্ট সহ ফাংশন</h3>
+<pre><code>def add(x: int, y: int) -> int:
+    return x + y</code></pre>
+</section>
+
+<section class="chapter" id="s16">
+<h2><span class="chnum">১৬</span> Lambda / অ্যানোনিমাস ফাংশন</h2>
+<pre><code>square = lambda x: x ** 2
+print(square(5))   <span class="cmt"># 25</span>
+
+print((lambda x, y: x ** 2 + y ** 2)(2, 1))   <span class="cmt"># 5</span>
+
+students = [("mahim", 85), ("mahim", 92), ("mahim", 78)]
+students.sort(key=lambda s: s[1], reverse=True)   <span class="cmt"># মার্ক অনুযায়ী সর্ট</span></code></pre>
+</section>
+
+<section class="chapter" id="s17">
+<h2><span class="chnum">১৭</span> মডিউল ও প্যাকেজ</h2>
+<pre><code>import math
+print(math.sqrt(16))   <span class="cmt"># 4.0</span>
+
+from math import ceil, floor
+import math as m
+import numpy as np   <span class="cmt"># থার্ড-পার্টি প্যাকেজও এভাবে</span></code></pre>
+<h3>নিজের মডিউল বানানো</h3>
+<pre><code><span class="cmt"># mymodule.py ফাইলে:</span>
+def greet(name):
+    return f"Hello, {name}!"
+
+<span class="cmt"># main.py ফাইলে:</span>
+import mymodule
+print(mymodule.greet("mahim"))</code></pre>
+<h3>if __name__ == "__main__":</h3>
+<pre><code>def main():
+    print("প্রোগ্রাম চলছে...")
+
+if __name__ == "__main__":
+    main()   <span class="cmt"># ফাইলটা সরাসরি রান হলেই main() কল হবে, ইমপোর্ট হলে হবে না</span></code></pre>
+<h3>প্যাকেজ (Package)</h3>
+<pre><code>myapp/
+    __init__.py
+    utils.py
+    models.py
+
+from myapp import utils
+from myapp.models import User</code></pre>
+</section>
+
+<section class="chapter" id="s18">
+<h2><span class="chnum">১৮</span> ফাইল হ্যান্ডলিং</h2>
+<h3>ফাইল ওপেন মোড</h3>
+<table>
+<tr><th>মোড</th><th>কাজ</th></tr>
+<tr><td><code>"r"</code></td><td>রিড (ডিফল্ট), ফাইল না থাকলে Error</td></tr>
+<tr><td><code>"w"</code></td><td>রাইট, আগের কনটেন্ট মুছে নতুন করে লেখে</td></tr>
+<tr><td><code>"a"</code></td><td>অ্যাপেন্ড, শেষে যোগ করে</td></tr>
+<tr><td><code>"b"</code></td><td>বাইনারি মোড (ইমেজ/ভিডিও ফাইলের জন্য)</td></tr>
+</table>
+<h3>লাইন বাই লাইন পড়া</h3>
+<pre><code>with open("myfile.txt", "r", encoding="utf8") as file:
+    for line in file:
+        print(line)</code></pre>
+<div class="note"><code>with</code> স্টেটমেন্ট ব্যবহার করলে ফাইল অটোমেটিক ক্লোজ হয়ে যায় — এটাই বেস্ট প্র্যাকটিস।</div>
+<h3>JSON অবজেক্ট লেখা ও পড়া</h3>
+<pre><code>import json
+contents = {"aa": 12, "bb": 21}
+with open("myfile2.txt", "w+") as file:
+    file.write(json.dumps(contents))
+
+with open('myfile2.txt', "r+") as file:
+    contents = json.load(file)
+print(contents)</code></pre>
+<h3>CSV ফাইল হ্যান্ডলিং</h3>
+<pre><code>import csv
+with open("data.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Age"])
+    writer.writerow(["mahim", 25])
+
+with open("data.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["Name"], row["Age"])</code></pre>
+<h3>pathlib (আধুনিক ফাইল পাথ হ্যান্ডলিং)</h3>
+<pre><code>from pathlib import Path
+p = Path("myfolder/myfile.txt")
+print(p.exists())
+print(p.name)      <span class="cmt"># 'myfile.txt'</span>
+print(p.suffix)    <span class="cmt"># '.txt'</span>
+p.mkdir(parents=True, exist_ok=True)
+text = p.read_text()
+p.write_text("Hello")</code></pre>
+</section>
+
+<section class="chapter" id="s19">
+<h2><span class="chnum">১৯</span> এক্সেপশন হ্যান্ডলিং (Error Handling)</h2>
+<pre><code>try:
+    raise IndexError("This is an index error")
+except IndexError as e:
+    print(f"এরর ধরা পড়েছে: {e}")
+except (TypeError, NameError):
+    pass
+else:
+    print("All good!")     <span class="cmt"># try-তে এরর না হলেই রান হবে</span>
+finally:
+    print("যাই ঘটুক, এটা সবসময় রান হবে")</code></pre>
+<h3>সাধারণ বিল্ট-ইন এক্সেপশন</h3>
+<table>
+<tr><th>এক্সেপশন</th><th>কারণ</th></tr>
+<tr><td><code>ValueError</code></td><td>ভুল ধরনের ভ্যালু, যেমন <code>int("abc")</code></td></tr>
+<tr><td><code>TypeError</code></td><td>ভুল ডেটা টাইপে অপারেশন</td></tr>
+<tr><td><code>IndexError</code></td><td>লিস্ট/স্ট্রিং ইনডেক্স আউট অফ রেঞ্জ</td></tr>
+<tr><td><code>KeyError</code></td><td>ডিকশনারিতে key না পাওয়া</td></tr>
+<tr><td><code>ZeroDivisionError</code></td><td>শূন্য দিয়ে ভাগ</td></tr>
+<tr><td><code>FileNotFoundError</code></td><td>ফাইল খুঁজে না পাওয়া</td></tr>
+<tr><td><code>AttributeError</code></td><td>অবজেক্টে নেই এমন অ্যাট্রিবিউট অ্যাক্সেস</td></tr>
+</table>
+<h3>কাস্টম এক্সেপশন ও assert</h3>
+<pre><code>class InsufficientFundsError(Exception):
+    """যখন অ্যাকাউন্টে যথেষ্ট টাকা নেই"""
+    pass
+
+def withdraw(balance, amount):
+    if amount &gt; balance:
+        raise InsufficientFundsError("ব্যালেন্স যথেষ্ট নেই")
+    return balance - amount
+
+def divide(a, b):
+    assert b != 0, "b শূন্য হতে পারবে না"
+    return a / b</code></pre>
+</section>
+
+<section class="chapter" id="s20">
+<h2><span class="chnum">২০</span> ক্লাস ও অবজেক্ট (OOP)</h2>
+<pre><code>class Animal:
+    def __init__(self, voice):
+        self.voice = voice   <span class="cmt"># self দিয়ে ইনস্ট্যান্স ভ্যারিয়েবল সেট করা হয়</span>
+
+cat = Animal('Meow')
+print(cat.voice)   <span class="cmt"># 'Meow'</span>
+
+class Dog:
+    def bark(self):
+        print("Ham-Ham")
+charlie = Dog()
+charlie.bark()</code></pre>
+<h3>ইনহেরিটেন্স ও super()</h3>
+<pre><code>class Animal:
+    def __init__(self, name, legs):
+        self.name = name
+        self.legs = legs
+
+class Dog(Animal):
+    def sound(self):
+        print("Woof!")
+
+yoki = Dog("Yoki", 4)
+print(yoki.name, yoki.legs)
+yoki.sound()
+
+class ParentClass:
+    def print_test(self):
+        print("Parent Method")
+
+class ChildClass(ParentClass):
+    def print_test(self):
+        print("Child Method")
+        super().print_test()   <span class="cmt"># প্যারেন্ট ক্লাসের মেথড কল করা</span></code></pre>
+<h3>এনক্যাপসুলেশন (Public, Protected, Private)</h3>
+<pre><code>class Account:
+    def __init__(self, balance):
+        self.balance = balance     <span class="cmt"># public</span>
+        self._pin = "1234"         <span class="cmt"># protected (কনভেনশন)</span>
+        self.__secret = "hidden"   <span class="cmt"># private (name mangling হয়)</span>
+
+acc = Account(1000)
+print(acc._Account__secret)   <span class="cmt"># ✅ name mangling এর কারণে এভাবে অ্যাক্সেস সম্ভব</span></code></pre>
+<h3>@property, @staticmethod, @classmethod</h3>
+<pre><code>class Circle:
+    pi = 3.1416
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, value):
+        if value &lt; 0:
+            raise ValueError("রেডিয়াস নেগেটিভ হতে পারবে না")
+        self._radius = value
+
+    @property
+    def area(self):
+        return self.pi * self._radius ** 2
+
+    @staticmethod
+    def is_valid_radius(value):
+        return value &gt; 0
+
+    @classmethod
+    def unit_circle(cls):
+        return cls(1)
+
+c = Circle(5)
+print(c.radius)   <span class="cmt"># 5 (() ছাড়া কল হচ্ছে, কারণ @property)</span>
+c.radius = 10</code></pre>
+<h3>অ্যাবস্ট্রাক্ট বেস ক্লাস</h3>
+<pre><code>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, w, h):
+        self.w, self.h = w, h
+    def area(self):
+        return self.w * self.h
+
+rect = Rectangle(4, 5)
+print(rect.area())   <span class="cmt"># 20</span></code></pre>
+<h3>Dataclass (Python 3.7+)</h3>
+<pre><code>from dataclasses import dataclass
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+p1, p2 = Point(1, 2), Point(1, 2)
+print(p1)          <span class="cmt"># Point(x=1, y=2) — __repr__ অটোমেটিক তৈরি হয়</span>
+print(p1 == p2)     <span class="cmt"># True — __eq__ অটোমেটিক তৈরি হয়</span></code></pre>
+</section>
+
+<section class="chapter" id="s21">
+<h2><span class="chnum">২১</span> ম্যাজিক / ডান্ডার মেথড</h2>
+<table>
+<tr><th>মেথড</th><th>কখন কল হয়</th></tr>
+<tr><td><code>__init__</code></td><td>অবজেক্ট তৈরির সময় (কনস্ট্রাক্টর)</td></tr>
+<tr><td><code>__str__</code></td><td><code>print(obj)</code> কল হলে</td></tr>
+<tr><td><code>__repr__</code></td><td>কনসোলে অবজেক্ট দেখালে</td></tr>
+<tr><td><code>__len__</code></td><td><code>len(obj)</code> কল হলে</td></tr>
+<tr><td><code>__eq__</code></td><td><code>obj1 == obj2</code></td></tr>
+<tr><td><code>__add__</code></td><td><code>obj1 + obj2</code></td></tr>
+<tr><td><code>__iter__</code></td><td><code>for x in obj</code> লুপে</td></tr>
+<tr><td><code>__call__</code></td><td>অবজেক্টকে ফাংশনের মতো কল করলে</td></tr>
+<tr><td><code>__enter__</code> / <code>__exit__</code></td><td><code>with obj:</code> ব্যবহৃত হলে</td></tr>
+</table>
+<pre><code>class Employee:
+    def __init__(self, name, salary):
+        self.name, self.salary = name, salary
+    def __repr__(self):
+        return self.name
+    def __eq__(self, other):
+        return self.salary == other.salary
+    def __add__(self, other):
+        return self.salary + other.salary
+    def __lt__(self, other):
+        return self.salary &lt; other.salary
+
+john = Employee('mahim', 50000)
+mike = Employee('mahim', 60000)
+print(john)          <span class="cmt"># mahim — __repr__</span>
+print(john == mike)  <span class="cmt"># False</span>
+print(john + mike)   <span class="cmt"># 110000</span></code></pre>
+</section>
+
+<section class="chapter" id="s22">
+<h2><span class="chnum">২২</span> ইটারেটর ও জেনারেটর</h2>
+<h3>ইটারেটর প্রোটোকল</h3>
+<pre><code>class Counter:
+    def __init__(self, limit):
+        self.limit = limit
+        self.current = 0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.current &lt; self.limit:
+            self.current += 1
+            return self.current
+        raise StopIteration
+
+for num in Counter(3):
+    print(num)   <span class="cmt"># 1 2 3</span></code></pre>
+<h3>জেনারেটর ফাংশন (yield)</h3>
+<pre><code>def double_numbers(iterable):
+    for i in iterable:
+        yield i + i   <span class="cmt"># রিটার্নের মতো, কিন্তু ফাংশনের অবস্থা মনে রাখে</span>
+
+gen = double_numbers([1, 2, 3])
+print(next(gen))   <span class="cmt"># 2</span>
+print(next(gen))   <span class="cmt"># 4</span></code></pre>
+<div class="note">জেনারেটর <b>লেজি (lazy)</b> — একবারে সব মেমোরিতে না রেখে চাহিদা অনুযায়ী ভ্যালু বানায়, ফলে বিশাল ডেটার জন্য মেমোরি-সাশ্রয়ী।</div>
+<h3>yield from</h3>
+<pre><code>def gen1():
+    yield 1
+    yield 2
+
+def gen2():
+    yield from gen1()
+    yield 3
+
+print(list(gen2()))   <span class="cmt"># [1, 2, 3]</span></code></pre>
+</section>
+
+<section class="chapter" id="s23">
+<h2><span class="chnum">২৩</span> ডেকোরেটর (Decorator)</h2>
+<p>ডেকোরেটর হলো এমন ফাংশন যা আরেকটা ফাংশনকে "র‍্যাপ" করে তার আচরণ পরিবর্তন/বর্ধিত করে, মূল ফাংশনের কোড না বদলিয়ে।</p>
+<pre><code>def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("ফাংশন কল হওয়ার আগে")
+        result = func(*args, **kwargs)
+        print("ফাংশন কল হওয়ার পরে")
+        return result
+    return wrapper
+
+@my_decorator   <span class="cmt"># এটা func = my_decorator(func) লেখার সমান</span>
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+say_hello("mahim")</code></pre>
+<h3>আর্গুমেন্টসহ ডেকোরেটর</h3>
+<pre><code>def repeat(times):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@repeat(times=3)
+def greet():
+    print("Hi!")
+
+greet()   <span class="cmt"># Hi! তিনবার প্রিন্ট হবে</span></code></pre>
+<h3>গুরুত্বপূর্ণ বিল্ট-ইন ডেকোরেটর</h3>
+<pre><code>from functools import lru_cache
+
+@lru_cache(maxsize=None)   <span class="cmt"># রিপিটেড কলের ফলাফল ক্যাশ করে রাখে</span>
+def fib(n):
+    if n &lt; 2:
+        return n
+    return fib(n-1) + fib(n-2)</code></pre>
+</section>
+
+<section class="chapter" id="s24">
+<h2><span class="chnum">২৪</span> কনটেক্সট ম্যানেজার (with statement)</h2>
+<pre><code>class FileManager:
+    def __init__(self, filename, mode):
+        self.filename, self.mode = filename, mode
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.file.close()
+
+with FileManager("test.txt", "w") as f:
+    f.write("Hello!")</code></pre>
+<h3>contextlib দিয়ে ফাংশন-বেজড কনটেক্সট ম্যানেজার</h3>
+<pre><code>from contextlib import contextmanager
+
+@contextmanager
+def my_context():
+    print("রিসোর্স ওপেন হলো")
+    yield "resource"
+    print("রিসোর্স ক্লোজ হলো")
+
+with my_context() as res:
+    print(f"ব্যবহার করছি: {res}")</code></pre>
+</section>
+
+<section class="chapter" id="s25">
+<h2><span class="chnum">২৫</span> কম্প্রিহেনশন (List/Dict/Set/Generator)</h2>
+<pre><code><span class="cmt"># লিস্ট কম্প্রিহেনশন</span>
+squares = [x**2 for x in range(10)]
+evens = [x for x in range(20) if x % 2 == 0]
+labels = ["even" if x % 2 == 0 else "odd" for x in range(5)]
+
+<span class="cmt"># ডিকশনারি ও সেট কম্প্রিহেনশন</span>
+squares_dict = {x: x**2 for x in range(5)}
+unique_lengths = {len(w) for w in ["hi", "hello", "hey"]}
+
+<span class="cmt"># জেনারেটর কম্প্রিহেনশন (লেজি, মেমোরি-সাশ্রয়ী)</span>
+gen = (x**2 for x in range(1000000))
+
+<span class="cmt"># নেস্টেড কম্প্রিহেনশন</span>
+matrix = [[1, 2], [3, 4], [5, 6]]
+flat = [num for row in matrix for num in row]   <span class="cmt"># [1, 2, 3, 4, 5, 6]</span></code></pre>
+</section>
+
+<section class="chapter" id="s26">
+<h2><span class="chnum">২৬</span> Collections মডিউল</h2>
+<h3>deque</h3>
+<pre><code>from collections import deque
+q = deque([1, 2, 3])
+q.append(4)        <span class="cmt"># ডানে যোগ =&gt; deque([1, 2, 3, 4])</span>
+q.appendleft(0)     <span class="cmt"># বামে যোগ =&gt; deque([0, 1, 2, 3, 4])</span>
+q.pop(); q.popleft()</code></pre>
+<h3>Counter</h3>
+<pre><code>from collections import Counter
+c = Counter("mississippi")
+print(c)                     <span class="cmt"># Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})</span>
+print(c.most_common(2))      <span class="cmt"># [('i', 4), ('s', 4)]</span></code></pre>
+<h3>defaultdict</h3>
+<pre><code>from collections import defaultdict
+dd = defaultdict(list)
+dd["fruits"].append("apple")   <span class="cmt"># KeyError হবে না</span></code></pre>
+<h3>ChainMap</h3>
+<pre><code>from collections import ChainMap
+combined = ChainMap({"size": "large"}, {"color": "red"})
+print(combined["color"])   <span class="cmt"># 'red'</span></code></pre>
+</section>
+
+<section class="chapter" id="s27">
+<h2><span class="chnum">২৭</span> Heapq (হিপ)</h2>
+<p>হিপ হলো এমন একটি বাইনারি ট্রি যেখানে প্রতিটি প্যারেন্ট নোডের ভ্যালু তার চাইল্ড নোডের চেয়ে ছোট বা সমান — সবচেয়ে ছোট/বড় ভ্যালু দ্রুত পাওয়ার জন্য কাজে লাগে।</p>
+<pre><code>import heapq
+myList = [9, 5, 4, 1, 3, 2]
+heapq.heapify(myList)          <span class="cmt"># Min Heap-এ কনভার্ট</span>
+print(myList[0])               <span class="cmt"># 1 — সবসময় সবচেয়ে ছোট ভ্যালুটাই থাকে প্রথমে</span>
+heapq.heappush(myList, 10)
+x = heapq.heappop(myList)
+
+print(heapq.nlargest(3, [5, 1, 8, 3, 9]))    <span class="cmt"># [9, 8, 5]</span>
+print(heapq.nsmallest(2, [5, 1, 8, 3, 9]))   <span class="cmt"># [1, 3]</span></code></pre>
+</section>
+
+<section class="chapter" id="s28">
+<h2><span class="chnum">২৮</span> Stack ও Queue</h2>
+<pre><code><span class="cmt"># Stack (LIFO)</span>
+stack = []
+stack.append(1); stack.append(2); stack.append(3)
+print(stack.pop())   <span class="cmt"># 3 — সবচেয়ে শেষে ঢোকা আইটেম প্রথমে বের হয়</span>
+
+<span class="cmt"># Queue (FIFO), deque দিয়ে দ্রুতভাবে</span>
+from collections import deque
+queue = deque()
+queue.append(1); queue.append(2)
+print(queue.popleft())   <span class="cmt"># 1 — সবচেয়ে আগে ঢোকা আইটেম প্রথমে বের হয়</span></code></pre>
+</section>
+
+<section class="chapter" id="s29">
+<h2><span class="chnum">২৯</span> রেগুলার এক্সপ্রেশন (re মডিউল)</h2>
+<pre><code>import re
+re.match(r"Hello", "Hello World")            <span class="cmt"># শুরু থেকে মিল খোঁজে</span>
+re.search(r"World", "Hello World")            <span class="cmt"># পুরো স্ট্রিংয়ে প্রথম মিল খোঁজে</span>
+re.findall(r"\d+", "I have 2 cats and 10 dogs")   <span class="cmt"># ['2', '10']</span>
+re.sub(r"\d+", "#", "I have 2 cats")           <span class="cmt"># 'I have # cats'</span>
+re.split(r"\s*,\s*", "a, b, c")                <span class="cmt"># ['a', 'b', 'c']</span>
+
+m = re.match(r"(\w+)@(\w+)\.com", "user@example.com")
+if m:
+    print(m.group(1))   <span class="cmt"># 'user'</span></code></pre>
+<h3>সাধারণ রেগেক্স প্যাটার্ন</h3>
+<table>
+<tr><th>প্যাটার্ন</th><th>মানে</th></tr>
+<tr><td><code>\d</code></td><td>কোনো ডিজিট (0-9)</td></tr>
+<tr><td><code>\w</code></td><td>অক্ষর, সংখ্যা বা আন্ডারস্কোর</td></tr>
+<tr><td><code>\s</code></td><td>হোয়াইটস্পেস</td></tr>
+<tr><td><code>.</code></td><td>যেকোনো একটি ক্যারেক্টার (নিউলাইন ছাড়া)</td></tr>
+<tr><td><code>^</code> / <code>$</code></td><td>স্ট্রিংয়ের শুরু / শেষ</td></tr>
+<tr><td><code>*</code> / <code>+</code> / <code>?</code></td><td>০ বা বেশি / ১ বা বেশি / ০ বা ১ বার</td></tr>
+<tr><td><code>{n,m}</code></td><td>কমপক্ষে n, সর্বোচ্চ m বার</td></tr>
+<tr><td><code>[abc]</code></td><td>a, b, বা c-এর যেকোনো একটি</td></tr>
+</table>
+</section>
+
+<section class="chapter" id="s30">
+<h2><span class="chnum">৩০</span> তারিখ ও সময় (datetime)</h2>
+<pre><code>from datetime import datetime, date, timedelta
+now = datetime.now()
+today = date.today()
+
+print(now.strftime("%Y-%m-%d %H:%M:%S"))   <span class="cmt"># '2026-09-26 14:30:00'</span>
+parsed = datetime.strptime("19-09-2026", "%d-%m-%Y")
+
+tomorrow = today + timedelta(days=1)
+diff = datetime(2026, 12, 31) - datetime(2026, 1, 1)
+print(diff.days)</code></pre>
+<h3>strftime ফরম্যাট কোড</h3>
+<table>
+<tr><th>কোড</th><th>মানে</th></tr>
+<tr><td><code>%Y</code></td><td>চার ডিজিটের বছর</td></tr>
+<tr><td><code>%m</code> / <code>%d</code></td><td>মাস / দিন</td></tr>
+<tr><td><code>%H</code> / <code>%M</code> / <code>%S</code></td><td>ঘণ্টা / মিনিট / সেকেন্ড</td></tr>
+<tr><td><code>%A</code> / <code>%B</code></td><td>সপ্তাহের দিনের পূর্ণনাম / মাসের পূর্ণনাম</td></tr>
+</table>
+</section>
+
+<section class="chapter" id="s31">
+<h2><span class="chnum">৩১</span> ফাংশনাল প্রোগ্রামিং</h2>
+<pre><code><span class="cmt"># map()</span>
+squared = list(map(lambda x: x**2, [1, 2, 3, 4]))
+
+<span class="cmt"># filter()</span>
+odds = list(filter(lambda x: x % 2 == 1, range(1, 20)))
+
+<span class="cmt"># reduce()</span>
+from functools import reduce
+total = reduce(lambda acc, x: acc + x, [1, 2, 3, 4])   <span class="cmt"># 10</span>
+
+<span class="cmt"># functools.partial</span>
+from functools import partial
+def power(base, exponent):
+    return base ** exponent
+square = partial(power, exponent=2)
+print(square(5))   <span class="cmt"># 25</span></code></pre>
+</section>
+
+<section class="chapter" id="s32">
+<h2><span class="chnum">৩২</span> টাইপ হিন্টিং (Type Hinting)</h2>
+<p>টাইপ হিন্ট রানটাইমে কিছু চেক করে না, কিন্তু কোড রিডেবিলিটি ও IDE/টুলের ভুল ধরার ক্ষমতা বাড়ায়।</p>
+<pre><code>from typing import List, Dict, Tuple, Optional, Union, Any
+
+names: List[str] = ["mahim", "mahim"]
+scores: Dict[str, int] = {"mahim": 90}
+maybe_name: Optional[str] = None      <span class="cmt"># str অথবা None</span>
+result: Union[int, str] = 5           <span class="cmt"># int অথবা str</span>
+
+<span class="cmt"># Python 3.9+ থেকে বিল্ট-ইন টাইপ দিয়েই জেনেরিক হিন্ট দেওয়া যায়</span>
+def total(nums: list[int]) -> int:
+    return sum(nums)</code></pre>
+</section>
+
+<section class="chapter" id="s33">
+<h2><span class="chnum">৩৩</span> মাল্টিথ্রেডিং ও মাল্টিপ্রসেসিং</h2>
+<pre><code>import threading
+def print_numbers():
+    for i in range(5):
+        print(i)
+
+t1 = threading.Thread(target=print_numbers)
+t1.start(); t1.join()</code></pre>
+<div class="note">পাইথনের GIL (Global Interpreter Lock)-এর কারণে থ্রেডিং CPU-বাউন্ড কাজে সত্যিকারের প্যারালালিজম দেয় না, কিন্তু I/O-বাউন্ড (নেটওয়ার্ক কল, ফাইল রিড) কাজে ভালো কাজ করে।</div>
+<pre><code>from multiprocessing import Process
+def square(n):
+    print(n * n)
+
+if __name__ == "__main__":
+    p1 = Process(target=square, args=(5,))
+    p1.start(); p1.join()</code></pre>
+<h3>concurrent.futures (আধুনিক, সহজ API)</h3>
+<pre><code>from concurrent.futures import ThreadPoolExecutor
+def task(n):
+    return n * n
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+    results = list(executor.map(task, [1, 2, 3, 4]))
+print(results)   <span class="cmt"># [1, 4, 9, 16]</span></code></pre>
+</section>
+
+<section class="chapter" id="s34">
+<h2><span class="chnum">৩৪</span> Asyncio (async/await)</h2>
+<p>Asyncio সিঙ্গেল-থ্রেডে অ্যাসিনক্রোনাস (non-blocking) কোড লিখতে সাহায্য করে — মূলত I/O-বাউন্ড কাজে ব্যবহৃত হয়।</p>
+<pre><code>import asyncio
+
+async def say_hello(delay, name):
+    await asyncio.sleep(delay)
+    print(f"Hello, {name}!")
+
+async def main():
+    await asyncio.gather(
+        say_hello(2, "mahim"),
+        say_hello(1, "mahim")
+    )   <span class="cmt"># দুটো একসাথে চলবে, মোট সময় লাগবে ~2 সেকেন্ড</span>
+
+asyncio.run(main())</code></pre>
+</section>
+
+<section class="chapter" id="s35">
+<h2><span class="chnum">৩৫</span> পূর্ণাঙ্গ স্ট্যান্ডার্ড লাইব্রেরি</h2>
+<h3>os ও sys</h3>
+<pre><code>import os
+os.getcwd(); os.listdir(".")
+os.path.join("a", "b")
+
+import sys
+sys.argv; sys.exit(0)</code></pre>
+<h3>math ও random</h3>
+<pre><code>import math
+math.sqrt(16); math.factorial(5); math.gcd(12, 18)
+
+import random
+random.randint(1, 10)
+random.choice([1, 2, 3])
+random.shuffle([1, 2, 3])</code></pre>
+<h3>itertools</h3>
+<pre><code>import itertools
+list(itertools.permutations([1,2,3]))
+list(itertools.combinations([1,2,3], 2))
+list(itertools.chain([1,2], [3,4]))          <span class="cmt"># [1, 2, 3, 4]</span>
+list(itertools.product([1,2], ['a','b']))</code></pre>
+<h3>argparse ও logging</h3>
+<pre><code>import argparse
+parser = argparse.ArgumentParser(description="একটি সহজ CLI টুল")
+parser.add_argument("name")
+parser.add_argument("--age", type=int, default=18)
+args = parser.parse_args()
+
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("ইনফো মেসেজ")</code></pre>
+</section>
+
+<section class="chapter" id="s36">
+<h2><span class="chnum">৩৬</span> Virtual Environment ও pip</h2>
+<pre><code><span class="cmt"># ভার্চুয়াল এনভায়রনমেন্ট তৈরি করা</span>
+python -m venv myenv
+
+<span class="cmt"># অ্যাক্টিভেট করা</span>
+myenv\Scripts\activate      <span class="cmt"># Windows</span>
+source myenv/bin/activate   <span class="cmt"># macOS/Linux</span>
+
+deactivate
+
+<span class="cmt"># pip দিয়ে প্যাকেজ ইনস্টল/ম্যানেজ করা</span>
+pip install numpy
+pip install numpy==1.26.0
+pip uninstall numpy
+pip list
+pip freeze &gt; requirements.txt
+pip install -r requirements.txt</code></pre>
+</section>
+
+<section class="chapter" id="s37">
+<h2><span class="chnum">৩৭</span> ইউনিট টেস্টিং (unittest / pytest)</h2>
+<pre><code><span class="cmt"># unittest (বিল্ট-ইন)</span>
+import unittest
+def add(a, b):
+    return a + b
+
+class TestMath(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(add(2, 3), 5)
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+<pre><code><span class="cmt"># pytest (থার্ড-পার্টি, বেশি চলতি ও সহজ সিনট্যাক্স)</span>
+def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(2, 3) == 5
+
+<span class="cmt"># টার্মিনাল থেকে: pytest test_math.py</span></code></pre>
+</section>
+
+<section class="chapter" id="s38">
+<h2><span class="chnum">৩৮</span> ডিবাগিং প্র্যাকটিস</h2>
+<pre><code><span class="cmt"># print ডিবাগিং</span>
+print(f"DEBUG: x = {x}")
+
+<span class="cmt"># breakpoint() — Python 3.7+, কোডের মাঝে পজ করে ডিবাগার চালু করে</span>
+breakpoint()
+
+<span class="cmt"># assert দিয়ে অনুমান যাচাই</span>
+assert x &gt; 0, "x পজিটিভ হওয়া উচিত ছিল"
+
+<span class="cmt"># traceback পুরোপুরি দেখা</span>
+import traceback
+try:
+    1 / 0
+except Exception:
+    traceback.print_exc()</code></pre>
+</section>
+
+<section class="chapter" id="s39">
+<h2><span class="chnum">৩৯</span> PEP 8 কোডিং স্টাইল গাইড</h2>
+<ul>
+<li>ইন্ডেন্টেশনে ৪ স্পেস ব্যবহার করুন (ট্যাব নয়)।</li>
+<li>প্রতি লাইন সর্বোচ্চ ৭৯ ক্যারেক্টারের মধ্যে রাখা ভালো।</li>
+<li>ভ্যারিয়েবল/ফাংশনের নাম: <code>snake_case</code></li>
+<li>ক্লাসের নাম: <code>PascalCase</code></li>
+<li>কনস্ট্যান্টের নাম: <code>UPPER_CASE</code></li>
+<li>অপারেটরের চারপাশে স্পেস দিন: <code>x = 1 + 2</code> (না লিখে <code>x=1+2</code>)</li>
+<li>ফাংশন/ক্লাসের মধ্যে ২টি খালি লাইন রাখা ভালো।</li>
+<li>ইমপোর্ট সবসময় ফাইলের শুরুতে লিখুন।</li>
+<li>অর্থবহ নাম দিন (যেমন <code>user_count</code>, শুধু <code>x</code> না লিখে)।</li>
+</ul>
+</section>
+
+<section class="chapter" id="s40">
+<h2><span class="chnum">৪০</span> বিবিধ (Miscellaneous)</h2>
+<h3>মাল্টিপল অ্যাসাইনমেন্ট ও আনপ্যাকিং</h3>
+<pre><code>a, *rest = [1, 2, 3, 4]         <span class="cmt"># a=1, rest=[2, 3, 4]</span>
+*init, last = [1, 2, 3, 4]      <span class="cmt"># init=[1, 2, 3], last=4</span>
+
+nums = [1, 2, 3]
+def add(a, b, c): return a + b + c
+print(add(*nums))               <span class="cmt"># লিস্ট আনপ্যাক করে আর্গুমেন্ট হিসেবে পাঠানো</span>
+
+d = {"a": 1, "b": 2}
+def show(a, b): print(a, b)
+show(**d)                       <span class="cmt"># ডিকশনারি আনপ্যাক করে কিওয়ার্ড আর্গুমেন্ট পাঠানো</span></code></pre>
+<h3>is বনাম ==</h3>
+<pre><code>a, b = [1, 2, 3], [1, 2, 3]
+print(a == b)   <span class="cmt"># True — ভ্যালু তুলনা</span>
+print(a is b)   <span class="cmt"># False — একই মেমোরি অবজেক্ট কিনা তুলনা</span></code></pre>
+<h3>Mutable বনাম Immutable টাইপ</h3>
+<table>
+<tr><th>Mutable</th><th>Immutable</th></tr>
+<tr><td><code>list</code>, <code>dict</code>, <code>set</code></td><td><code>int</code>, <code>float</code>, <code>bool</code>, <code>str</code>, <code>tuple</code>, <code>frozenset</code></td></tr>
+</table>
+<h3>Mutable Default Argument ফাঁদ</h3>
+<pre><code><span class="cmt"># ❌ ভুল — ডিফল্ট লিস্ট সব কলের মধ্যে শেয়ার হয়ে যায়</span>
+def add_item(item, items=[]):
+    items.append(item)
+    return items
+
+<span class="cmt"># ✅ সঠিক</span>
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items</code></pre>
+<h3>এক্সিকিউশন টাইম মাপা</h3>
+<pre><code>import time
+start = time.perf_counter()
+<span class="cmt"># ... কিছু কোড ...</span>
+end = time.perf_counter()
+print(f"সময় লেগেছে: {end - start:.4f} সেকেন্ড")</code></pre>
+</section>
+
+<section class="chapter" id="s41">
+<h2><span class="chnum">৪১</span> কুইক রেফারেন্স টেবিল</h2>
+<h3>গুরুত্বপূর্ণ বিল্ট-ইন ফাংশন</h3>
+<table>
+<tr><th>ফাংশন</th><th>কাজ</th></tr>
+<tr><td><code>len(x)</code></td><td>দৈর্ঘ্য/সাইজ</td></tr>
+<tr><td><code>type(x)</code></td><td>ডেটা টাইপ</td></tr>
+<tr><td><code>range(a, b, s)</code></td><td>নাম্বার সিকুয়েন্স তৈরি</td></tr>
+<tr><td><code>enumerate(x)</code></td><td>ইনডেক্স + ভ্যালু একসাথে</td></tr>
+<tr><td><code>zip(a, b)</code></td><td>একাধিক iterable একসাথে জোড়া</td></tr>
+<tr><td><code>map(fn, x)</code> / <code>filter(fn, x)</code></td><td>প্রতিটি আইটেমে ফাংশন প্রয়োগ / শর্ত মেনে ফিল্টার</td></tr>
+<tr><td><code>sorted(x)</code> / <code>reversed(x)</code></td><td>সর্টেড নতুন কালেকশন / উল্টানো ইটারেটর</td></tr>
+<tr><td><code>sum(x)</code> / <code>min(x)</code> / <code>max(x)</code></td><td>যোগফল / সর্বনিম্ন / সর্বোচ্চ</td></tr>
+<tr><td><code>all(x)</code> / <code>any(x)</code></td><td>সব True কিনা / কোনো একটা True কিনা</td></tr>
+<tr><td><code>isinstance(x, t)</code></td><td>নির্দিষ্ট টাইপ কিনা</td></tr>
+<tr><td><code>open(file, mode)</code></td><td>ফাইল ওপেন করা</td></tr>
+</table>
+<h3>List, Dict, Set মেথডের সারসংক্ষেপ</h3>
+<table>
+<tr><th>কালেকশন</th><th>যোগ করা</th><th>মুছা</th><th>সার্চ</th></tr>
+<tr><td><code>list</code></td><td><code>.append()</code>, <code>.insert()</code>, <code>.extend()</code></td><td><code>.remove()</code>, <code>.pop()</code>, <code>del</code></td><td><code>.index()</code>, <code>in</code></td></tr>
+<tr><td><code>dict</code></td><td><code>d[key]=val</code>, <code>.update()</code></td><td><code>.pop()</code>, <code>del d[key]</code></td><td><code>.get()</code>, <code>in</code></td></tr>
+<tr><td><code>set</code></td><td><code>.add()</code>, <code>.update()</code></td><td><code>.remove()</code>, <code>.discard()</code></td><td><code>in</code></td></tr>
+</table>
+<div class="note" style="text-align:center; font-size:1rem;">🎯 এই চিট শিটে পাইথনের বেসিক সিনট্যাক্স থেকে শুরু করে OOP, ফাইল হ্যান্ডলিং, এক্সেপশন হ্যান্ডলিং, জেনারেটর, ডেকোরেটর, রেগুলার এক্সপ্রেশন, মাল্টিথ্রেডিং, asyncio এবং স্ট্যান্ডার্ড লাইব্রেরি পর্যন্ত সবকিছু কভার করা হয়েছে।<br><br><b>হ্যাপি কোডিং! 🐍</b></div>
+</section>
+
+<footer class="endnote">পাইথন সম্পূর্ণ চিট শিট — ইন্টারেক্টিভ বাংলা ই-বুক সংস্করণ<br><br><span>Designed by MD Mahim Hossen</span></footer>
+
+    </div>
+  </main>
+</div>
+
+<button class="top-to-btn" id="topBtn" title="উপরে যাও">↑</button>
+
+<script>
+(function(){
+  // Mark that JavaScript is available; mobile CSS uses this to keep a no-JS TOC fallback visible.
+  document.documentElement.classList.add("js-ready");
+  const chapters = [
+    ["s1","০১","পাইথন পরিচিতি ও ইতিহাস"],
+    ["s2","০২","কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"],
+    ["s3","০৩","ভ্যারিয়েবল ও ডেটা টাইপ"],
+    ["s4","০৪","সংখ্যা ও গাণিতিক অপারেটর"],
+    ["s5","০৫","সব ধরনের অপারেটর"],
+    ["s6","০৬","স্ট্রিং (String)"],
+    ["s7","০৭","f-String ও স্ট্রিং ফরম্যাটিং"],
+    ["s8","০৮","লিস্ট (List)"],
+    ["s9","০৯","টাপল (Tuple)"],
+    ["s10","১০","সেট (Set)"],
+    ["s11","১১","ডিকশনারি (Dictionary)"],
+    ["s12","১২","টাইপ কাস্টিং / কনভার্শন"],
+    ["s13","১৩","কন্ডিশনাল স্টেটমেন্ট"],
+    ["s14","১৪","লুপ (Loop)"],
+    ["s15","১৫","ফাংশন (Function)"],
+    ["s16","১৬","Lambda / অ্যানোনিমাস ফাংশন"],
+    ["s17","১৭","মডিউল ও প্যাকেজ"],
+    ["s18","১৮","ফাইল হ্যান্ডলিং"],
+    ["s19","১৯","এক্সেপশন হ্যান্ডলিং"],
+    ["s20","২০","ক্লাস ও অবজেক্ট (OOP)"],
+    ["s21","২১","ম্যাজিক / ডান্ডার মেথড"],
+    ["s22","২২","ইটারেটর ও জেনারেটর"],
+    ["s23","২৩","ডেকোরেটর (Decorator)"],
+    ["s24","২৪","কনটেক্সট ম্যানেজার (with)"],
+    ["s25","২৫","কম্প্রিহেনশন"],
+    ["s26","২৬","Collections মডিউল"],
+    ["s27","২৭","Heapq (হিপ)"],
+    ["s28","২৮","Stack ও Queue"],
+    ["s29","২৯","রেগুলার এক্সপ্রেশন (re)"],
+    ["s30","৩০","তারিখ ও সময় (datetime)"],
+    ["s31","৩১","ফাংশনাল প্রোগ্রামিং"],
+    ["s32","৩২","টাইপ হিন্টিং"],
+    ["s33","৩৩","মাল্টিথ্রেডিং ও মাল্টিপ্রসেসিং"],
+    ["s34","৩৪","Asyncio (async/await)"],
+    ["s35","৩৫","পূর্ণাঙ্গ স্ট্যান্ডার্ড লাইব্রেরি"],
+    ["s36","৩৬","Virtual Environment ও pip"],
+    ["s37","৩৭","ইউনিট টেস্টিং"],
+    ["s38","৩৮","ডিবাগিং প্র্যাকটিস"],
+    ["s39","৩৯","PEP 8 কোডিং স্টাইল গাইড"],
+    ["s40","৪০","বিবিধ (Miscellaneous)"],
+    ["s41","৪১","কুইক রেফারেন্স টেবিল"]
+  ];
+
+  const tocList = document.getElementById('tocList');
+  // Keep the static TOC as the primary source so it also works when JavaScript is unavailable.
+  // Generate it only if the list is empty, preventing duplicate entries.
+  if (!tocList.children.length) {
+    chapters.forEach(([id, num, title])=>{
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.dataset.id = id;
+      a.dataset.title = (num + ' ' + title).toLowerCase();
+      a.innerHTML = '<span class="toc-num">'+num+'</span>' + title;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  }
+
+  // Reliable chapter navigation for desktop and mobile WebViews/local HTML viewers.
+  tocList.addEventListener('click', (e)=>{
+    const a = e.target.closest('a[data-id]');
+    if(!a) return;
+    const id = a.dataset.id;
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    e.preventDefault();
+    target.scrollIntoView({behavior:'smooth', block:'start'});
+    try {
+      history.replaceState(null, '', '#' + id);
+    } catch (_) {
+      location.hash = id;
+    }
+    if(window.innerWidth <= 900) closeSidebar();
+  });
+
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const menuBtn = document.getElementById('menuBtn');
+  const tocToggle = document.getElementById('tocToggle');
+
+  function openSidebar(){ sidebar.classList.add('open'); overlay.classList.add('show'); if(tocToggle) tocToggle.checked = true; }
+  function closeSidebar(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); if(tocToggle) tocToggle.checked = false; }
+  if(tocToggle) tocToggle.addEventListener('change', ()=>{
+    if(tocToggle.checked){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+    else { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  });
+  overlay.addEventListener('click', closeSidebar);
+  // TOC search filter
+  document.getElementById('tocSearch').addEventListener('input', function(){
+    const q = this.value.trim().toLowerCase();
+    tocList.querySelectorAll('a').forEach(a=>{
+      a.parentElement.style.display = a.dataset.title.includes(q) ? '' : 'none';
+    });
+  });
+
+  // settings popover
+  const settingsBtn = document.getElementById('settingsBtn');
+  const controlsPop = document.getElementById('controlsPop');
+  settingsBtn.addEventListener('click', ()=> controlsPop.classList.toggle('open'));
+  document.addEventListener('click', (e)=>{
+    if(!controlsPop.contains(e.target) && e.target !== settingsBtn && !controlsPop.classList.contains('closing')){
+      if(controlsPop.classList.contains('open') && !settingsBtn.contains(e.target) && !controlsPop.contains(e.target)){
+        controlsPop.classList.remove('open');
+      }
+    }
+  });
+
+  // Theme
+  const root = document.documentElement;
+  const themeSeg = document.getElementById('themeSeg');
+  function setTheme(t){
+    root.setAttribute('data-theme', t);
+    localStorage.setItem('pcs-theme', t);
+    themeSeg.querySelectorAll('button').forEach(b=> b.classList.toggle('active', b.dataset.theme === t));
+  }
+  themeSeg.addEventListener('click', (e)=>{
+    if(e.target.tagName === 'BUTTON') setTheme(e.target.dataset.theme);
+  });
+  setTheme(localStorage.getItem('pcs-theme') || 'light');
+
+  // Font size
+  let fsPct = parseInt(localStorage.getItem('pcs-fs') || '100', 10);
+  const fsVal = document.getElementById('fsVal');
+  function applyFs(){
+    document.documentElement.style.setProperty('--base-fs', (17 * fsPct/100) + 'px');
+    fsVal.textContent = fsPct + '%';
+    localStorage.setItem('pcs-fs', fsPct);
+  }
+  document.getElementById('fsPlus').addEventListener('click', ()=>{ fsPct = Math.min(160, fsPct+10); applyFs(); });
+  document.getElementById('fsMinus').addEventListener('click', ()=>{ fsPct = Math.max(70, fsPct-10); applyFs(); });
+  applyFs();
+
+  // Reading mode
+  // Reading Mode does not control the sidebar. Both can remain active together.
+  const readingBtn = document.getElementById('readingBtn');
+  const readSeg = document.getElementById('readSeg');
+  function setReading(on, persist=true){
+    document.body.classList.toggle('reading-mode', on);
+    readingBtn.classList.toggle('active', on);
+    readSeg.querySelectorAll('button').forEach(b=> b.classList.toggle('active', (b.dataset.on==='1') === on));
+    if(persist) localStorage.setItem('pcs-reading', on ? '1':'0');
+  }
+  readingBtn.addEventListener('click', ()=> setReading(!document.body.classList.contains('reading-mode')));
+  readSeg.addEventListener('click', (e)=>{
+    if(e.target.tagName === 'BUTTON') setReading(e.target.dataset.on === '1');
+  });
+  // Restore the user's Reading Mode choice; it stays on until the user turns it off.
+  let savedReading = false;
+  try { savedReading = localStorage.getItem('pcs-reading') === '1'; } catch (_) {}
+  setReading(savedReading, false);
+
+  // Scroll spy + progress bar + top button
+  const progressBar = document.getElementById('progressBar');
+  const topBtn = document.getElementById('topBtn');
+  const sections = chapters.map(c => document.getElementById(c[0])).filter(Boolean);
+  const tocLinks = Array.from(tocList.querySelectorAll('a'));
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (docHeight > 0 ? (scrollTop/docHeight*100) : 0) + '%';
+    topBtn.classList.toggle('show', scrollTop > 500);
+
+    let currentId = sections[0] ? sections[0].id : null;
+    for(const sec of sections){
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 90) currentId = sec.id;
+    }
+    tocLinks.forEach(a => a.classList.toggle('active', a.dataset.id === currentId));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
+</body>
+</html>
