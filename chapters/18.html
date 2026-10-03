@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>১৮ ফাইল হ্যান্ডলিং — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -65,7 +65,7 @@
 <li><a href="../chapters/15.html" data-title="১৫ ফাংশন (function)"><span class="toc-num">১৫</span>ফাংশন (Function)</a></li>
 <li><a href="../chapters/16.html" data-title="১৬ lambda / অ্যানোনিমাস ফাংশন"><span class="toc-num">১৬</span>Lambda / অ্যানোনিমাস ফাংশন</a></li>
 <li><a href="../chapters/17.html" data-title="১৭ মডিউল ও প্যাকেজ"><span class="toc-num">১৭</span>মডিউল ও প্যাকেজ</a></li>
-<li><a href="../chapters/18.html" data-title="১৮ ফাইল হ্যান্ডলিং"><span class="toc-num">১৮</span>ফাইল হ্যান্ডলিং</a></li>
+<li><a href="../chapters/18.html" data-title="১৮ ফাইল হ্যান্ডলিং" class="active"><span class="toc-num">১৮</span>ফাইল হ্যান্ডলিং</a></li>
 <li><a href="../chapters/19.html" data-title="১৯ এক্সেপশন হ্যান্ডলিং"><span class="toc-num">১৯</span>এক্সেপশন হ্যান্ডলিং</a></li>
 <li><a href="../chapters/20.html" data-title="২০ ক্লাস ও অবজেক্ট (oop)"><span class="toc-num">২০</span>ক্লাস ও অবজেক্ট (OOP)</a></li>
 <li><a href="../chapters/21.html" data-title="২১ ম্যাজিক / ডান্ডার মেথড"><span class="toc-num">২১</span>ম্যাজিক / ডান্ডার মেথড</a></li>
@@ -93,26 +93,54 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s18">
+<h2><span class="chnum">১৮</span> ফাইল হ্যান্ডলিং</h2>
+<h3>ফাইল ওপেন মোড</h3>
+<table>
+<tr><th>মোড</th><th>কাজ</th></tr>
+<tr><td><code>"r"</code></td><td>রিড (ডিফল্ট), ফাইল না থাকলে Error</td></tr>
+<tr><td><code>"w"</code></td><td>রাইট, আগের কনটেন্ট মুছে নতুন করে লেখে</td></tr>
+<tr><td><code>"a"</code></td><td>অ্যাপেন্ড, শেষে যোগ করে</td></tr>
+<tr><td><code>"b"</code></td><td>বাইনারি মোড (ইমেজ/ভিডিও ফাইলের জন্য)</td></tr>
+</table>
+<h3>লাইন বাই লাইন পড়া</h3>
+<pre><code>with open("myfile.txt", "r", encoding="utf8") as file:
+    for line in file:
+        print(line)</code></pre>
+<div class="note"><code>with</code> স্টেটমেন্ট ব্যবহার করলে ফাইল অটোমেটিক ক্লোজ হয়ে যায় — এটাই বেস্ট প্র্যাকটিস।</div>
+<h3>JSON অবজেক্ট লেখা ও পড়া</h3>
+<pre><code>import json
+contents = {"aa": 12, "bb": 21}
+with open("myfile2.txt", "w+") as file:
+    file.write(json.dumps(contents))
+
+with open('myfile2.txt', "r+") as file:
+    contents = json.load(file)
+print(contents)</code></pre>
+<h3>CSV ফাইল হ্যান্ডলিং</h3>
+<pre><code>import csv
+with open("data.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Age"])
+    writer.writerow(["Mahim", 25])
+
+with open("data.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["Name"], row["Age"])</code></pre>
+<h3>pathlib (আধুনিক ফাইল পাথ হ্যান্ডলিং)</h3>
+<pre><code>from pathlib import Path
+p = Path("myfolder/myfile.txt")
+print(p.exists())
+print(p.name)      <span class="cmt"># 'myfile.txt'</span>
+print(p.suffix)    <span class="cmt"># '.txt'</span>
+p.mkdir(parents=True, exist_ok=True)
+text = p.read_text()
+p.write_text("Hello")</code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="17.html"><span class="dir">← আগের অধ্যায়</span>১৭ মডিউল ও প্যাকেজ</a>
+        <a class="next" href="19.html"><span class="dir">পরের অধ্যায় →</span>১৯ এক্সেপশন হ্যান্ডলিং</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>০৭ f-String ও স্ট্রিং ফরম্যাটিং — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,13 +48,13 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
 <li><a href="../chapters/05.html" data-title="০৫ সব ধরনের অপারেটর"><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
 <li><a href="../chapters/06.html" data-title="০৬ স্ট্রিং (string)"><span class="toc-num">০৬</span>স্ট্রিং (String)</a></li>
-<li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
+<li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং" class="active"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
 <li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
 <li><a href="../chapters/09.html" data-title="০৯ টাপল (tuple)"><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
 <li><a href="../chapters/10.html" data-title="১০ সেট (set)"><span class="toc-num">১০</span>সেট (Set)</a></li>
@@ -93,26 +93,36 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s7">
+<h2><span class="chnum">০৭</span> f-String ও স্ট্রিং ফরম্যাটিং</h2>
+<h3>পুরনো % ফরম্যাটিং</h3>
+<pre><code>name, age = "Mahim", 23
+print("%s is %d years old." % (name, age))   <span class="cmt"># Mahim is 23 years old.</span></code></pre>
+<h3>f-String (Python 3.6+) — সবচেয়ে আধুনিক পদ্ধতি</h3>
+<pre><code>website = 'Google.com'
+print(f"Hello, {website}")            <span class="cmt"># "Hello, Google.com"</span>
+
+num = 10
+print(f'{num} + 10 = {num + 10}')     <span class="cmt"># '10 + 10 = 20' — ভেতরে এক্সপ্রেশনও চলে</span></code></pre>
+<h3>f-String Fill / Align</h3>
+<pre><code>print(f'{"test":*&gt;10}')   <span class="cmt"># '******test' — ডানে অ্যালাইন</span>
+print(f'{"test":*&lt;10}')   <span class="cmt"># 'test******' — বামে অ্যালাইন</span>
+print(f'{"test":*^10}')   <span class="cmt"># '***test***' — মাঝে অ্যালাইন</span>
+print(f'{12345:0&gt;10}')    <span class="cmt"># '0000012345'</span></code></pre>
+<h3>নাম্বার বেস ও ফরম্যাট</h3>
+<pre><code>print(f'{10:b}')     <span class="cmt"># '1010' — বাইনারি</span>
+print(f'{200:x}')    <span class="cmt"># 'c8' — হেক্সাডেসিমেল</span>
+print(f'{65:c}')     <span class="cmt"># 'A' — ASCII কোড থেকে ক্যারেক্টার</span></code></pre>
+<h3>Precision, Grouping, Percentage, Sign</h3>
+<pre><code>import math
+print(f'{math.pi:.2f}')      <span class="cmt"># '3.14'</span>
+print(f'{1000000:,.2f}')     <span class="cmt"># '1,000,000.00'</span>
+print(f'{0.25:.0%}')         <span class="cmt"># '25%'</span>
+print(f'{12345:+}')          <span class="cmt"># '+12345'</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="06.html"><span class="dir">← আগের অধ্যায়</span>০৬ স্ট্রিং (String)</a>
+        <a class="next" href="08.html"><span class="dir">পরের অধ্যায় →</span>০৮ লিস্ট (List)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

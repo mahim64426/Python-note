@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>২৯ রেগুলার এক্সপ্রেশন (re) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -76,7 +76,7 @@
 <li><a href="../chapters/26.html" data-title="২৬ collections মডিউল"><span class="toc-num">২৬</span>Collections মডিউল</a></li>
 <li><a href="../chapters/27.html" data-title="২৭ heapq (হিপ)"><span class="toc-num">২৭</span>Heapq (হিপ)</a></li>
 <li><a href="../chapters/28.html" data-title="২৮ stack ও queue"><span class="toc-num">২৮</span>Stack ও Queue</a></li>
-<li><a href="../chapters/29.html" data-title="২৯ রেগুলার এক্সপ্রেশন (re)"><span class="toc-num">২৯</span>রেগুলার এক্সপ্রেশন (re)</a></li>
+<li><a href="../chapters/29.html" data-title="২৯ রেগুলার এক্সপ্রেশন (re)" class="active"><span class="toc-num">২৯</span>রেগুলার এক্সপ্রেশন (re)</a></li>
 <li><a href="../chapters/30.html" data-title="৩০ তারিখ ও সময় (datetime)"><span class="toc-num">৩০</span>তারিখ ও সময় (datetime)</a></li>
 <li><a href="../chapters/31.html" data-title="৩১ ফাংশনাল প্রোগ্রামিং"><span class="toc-num">৩১</span>ফাংশনাল প্রোগ্রামিং</a></li>
 <li><a href="../chapters/32.html" data-title="৩২ টাইপ হিন্টিং"><span class="toc-num">৩২</span>টাইপ হিন্টিং</a></li>
@@ -93,26 +93,34 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s29">
+<h2><span class="chnum">২৯</span> রেগুলার এক্সপ্রেশন (re মডিউল)</h2>
+<pre><code>import re
+re.match(r"Hello", "Hello World")            <span class="cmt"># শুরু থেকে মিল খোঁজে</span>
+re.search(r"World", "Hello World")            <span class="cmt"># পুরো স্ট্রিংয়ে প্রথম মিল খোঁজে</span>
+re.findall(r"\d+", "I have 2 cats and 10 dogs")   <span class="cmt"># ['2', '10']</span>
+re.sub(r"\d+", "#", "I have 2 cats")           <span class="cmt"># 'I have # cats'</span>
+re.split(r"\s*,\s*", "a, b, c")                <span class="cmt"># ['a', 'b', 'c']</span>
+
+m = re.match(r"(\w+)@(\w+)\.com", "user@example.com")
+if m:
+    print(m.group(1))   <span class="cmt"># 'user'</span></code></pre>
+<h3>সাধারণ রেগেক্স প্যাটার্ন</h3>
+<table>
+<tr><th>প্যাটার্ন</th><th>মানে</th></tr>
+<tr><td><code>\d</code></td><td>কোনো ডিজিট (0-9)</td></tr>
+<tr><td><code>\w</code></td><td>অক্ষর, সংখ্যা বা আন্ডারস্কোর</td></tr>
+<tr><td><code>\s</code></td><td>হোয়াইটস্পেস</td></tr>
+<tr><td><code>.</code></td><td>যেকোনো একটি ক্যারেক্টার (নিউলাইন ছাড়া)</td></tr>
+<tr><td><code>^</code> / <code>$</code></td><td>স্ট্রিংয়ের শুরু / শেষ</td></tr>
+<tr><td><code>*</code> / <code>+</code> / <code>?</code></td><td>০ বা বেশি / ১ বা বেশি / ০ বা ১ বার</td></tr>
+<tr><td><code>{n,m}</code></td><td>কমপক্ষে n, সর্বোচ্চ m বার</td></tr>
+<tr><td><code>[abc]</code></td><td>a, b, বা c-এর যেকোনো একটি</td></tr>
+</table>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="28.html"><span class="dir">← আগের অধ্যায়</span>২৮ Stack ও Queue</a>
+        <a class="next" href="30.html"><span class="dir">পরের অধ্যায় →</span>৩০ তারিখ ও সময় (datetime)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

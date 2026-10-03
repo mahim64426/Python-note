@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>১০ সেট (Set) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -57,7 +57,7 @@
 <li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
 <li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
 <li><a href="../chapters/09.html" data-title="০৯ টাপল (tuple)"><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
-<li><a href="../chapters/10.html" data-title="১০ সেট (set)"><span class="toc-num">১০</span>সেট (Set)</a></li>
+<li><a href="../chapters/10.html" data-title="১০ সেট (set)" class="active"><span class="toc-num">১০</span>সেট (Set)</a></li>
 <li><a href="../chapters/11.html" data-title="১১ ডিকশনারি (dictionary)"><span class="toc-num">১১</span>ডিকশনারি (Dictionary)</a></li>
 <li><a href="../chapters/12.html" data-title="১২ টাইপ কাস্টিং / কনভার্শন"><span class="toc-num">১২</span>টাইপ কাস্টিং / কনভার্শন</a></li>
 <li><a href="../chapters/13.html" data-title="১৩ কন্ডিশনাল স্টেটমেন্ট"><span class="toc-num">১৩</span>কন্ডিশনাল স্টেটমেন্ট</a></li>
@@ -93,26 +93,35 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s10">
+<h2><span class="chnum">১০</span> সেট (Set)</h2>
+<p>সেট হলো অর্ডারলেস, ইউনিক (ডুপ্লিকেট-মুক্ত) ভ্যালুর একটি কালেকশন। মিউটেবল, কিন্তু ভেতরের প্রতিটি আইটেমকে হ্যাশেবল হতে হয়।</p>
+<pre><code>set1 = {"a", "b", "c"}
+empty_set = set()   <span class="cmt"># খালি সেট বানাতে {} লেখা যাবে না (তাতে dict হয়ে যাবে)</span></code></pre>
+<h3>সেটের অপারেশন</h3>
+<table>
+<tr><th>মেথড / অপারেটর</th><th>কাজ</th></tr>
+<tr><td><code>.union(s2)</code> / <code>|</code></td><td>দুই সেটের মিলিত সব আইটেম</td></tr>
+<tr><td><code>.intersection(s2)</code> / <code>&amp;</code></td><td>দুই সেটে কমন আইটেম</td></tr>
+<tr><td><code>.difference(s2)</code> / <code>-</code></td><td>প্রথম সেটে আছে, দ্বিতীয়টায় নেই</td></tr>
+<tr><td><code>.symmetric_difference(s2)</code> / <code>^</code></td><td>যা কমন নয়</td></tr>
+</table>
+<pre><code>a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+print(a | b)   <span class="cmt"># {1, 2, 3, 4, 5, 6}</span>
+print(a &amp; b)   <span class="cmt"># {3, 4}</span>
+print(a - b)   <span class="cmt"># {1, 2}</span>
+print(a ^ b)   <span class="cmt"># {1, 2, 5, 6}</span>
+
+s = {1, 2, 2, 3, 3, 3}
+print(s)   <span class="cmt"># {1, 2, 3} — ডুপ্লিকেট অটোমেটিক বাদ যায়</span></code></pre>
+<h3>সেট কম্প্রিহেনশন ও frozenset</h3>
+<pre><code>squares = {x**2 for x in range(6)}
+fs = frozenset({1, 2, 3})   <span class="cmt"># ইমিউটেবল সেট</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="09.html"><span class="dir">← আগের অধ্যায়</span>০৯ টাপল (Tuple)</a>
+        <a class="next" href="11.html"><span class="dir">পরের অধ্যায় →</span>১১ ডিকশনারি (Dictionary)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

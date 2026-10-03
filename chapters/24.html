@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>২৪ কনটেক্সট ম্যানেজার (with) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -71,7 +71,7 @@
 <li><a href="../chapters/21.html" data-title="২১ ম্যাজিক / ডান্ডার মেথড"><span class="toc-num">২১</span>ম্যাজিক / ডান্ডার মেথড</a></li>
 <li><a href="../chapters/22.html" data-title="২২ ইটারেটর ও জেনারেটর"><span class="toc-num">২২</span>ইটারেটর ও জেনারেটর</a></li>
 <li><a href="../chapters/23.html" data-title="২৩ ডেকোরেটর (decorator)"><span class="toc-num">২৩</span>ডেকোরেটর (Decorator)</a></li>
-<li><a href="../chapters/24.html" data-title="২৪ কনটেক্সট ম্যানেজার (with)"><span class="toc-num">২৪</span>কনটেক্সট ম্যানেজার (with)</a></li>
+<li><a href="../chapters/24.html" data-title="২৪ কনটেক্সট ম্যানেজার (with)" class="active"><span class="toc-num">২৪</span>কনটেক্সট ম্যানেজার (with)</a></li>
 <li><a href="../chapters/25.html" data-title="২৫ কম্প্রিহেনশন"><span class="toc-num">২৫</span>কম্প্রিহেনশন</a></li>
 <li><a href="../chapters/26.html" data-title="২৬ collections মডিউল"><span class="toc-num">২৬</span>Collections মডিউল</a></li>
 <li><a href="../chapters/27.html" data-title="২৭ heapq (হিপ)"><span class="toc-num">২৭</span>Heapq (হিপ)</a></li>
@@ -93,26 +93,34 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s24">
+<h2><span class="chnum">২৪</span> কনটেক্সট ম্যানেজার (with statement)</h2>
+<pre><code>class FileManager:
+    def __init__(self, filename, mode):
+        self.filename, self.mode = filename, mode
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.file.close()
+
+with FileManager("test.txt", "w") as f:
+    f.write("Hello!")</code></pre>
+<h3>contextlib দিয়ে ফাংশন-বেজড কনটেক্সট ম্যানেজার</h3>
+<pre><code>from contextlib import contextmanager
+
+@contextmanager
+def my_context():
+    print("রিসোর্স ওপেন হলো")
+    yield "resource"
+    print("রিসোর্স ক্লোজ হলো")
+
+with my_context() as res:
+    print(f"ব্যবহার করছি: {res}")</code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="23.html"><span class="dir">← আগের অধ্যায়</span>২৩ ডেকোরেটর (Decorator)</a>
+        <a class="next" href="25.html"><span class="dir">পরের অধ্যায় →</span>২৫ কম্প্রিহেনশন</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

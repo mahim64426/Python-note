@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,8 +48,8 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
-<li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+<li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট" class="active"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
 <li><a href="../chapters/05.html" data-title="০৫ সব ধরনের অপারেটর"><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
@@ -93,26 +93,37 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s2">
+<h2><span class="chnum">০২</span> কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</h2>
+<h3>কমেন্ট</h3>
+<pre><code><span class="cmt"># এটি একটি সিঙ্গেল-লাইন কমেন্ট</span>
+
+"""
+এটি মাল্টি-লাইন স্ট্রিং, প্রায়ই ডকস্ট্রিং/কমেন্ট হিসেবে ব্যবহৃত হয়
+তিন ডাবল কোট (""") দিয়ে লেখা হয়
+"""
+
+'''
+তিন সিঙ্গেল কোট (''') দিয়েও মাল্টি-লাইন স্ট্রিং লেখা যায়
+'''</code></pre>
+<h3>ইন্ডেন্টেশন</h3>
+<p>পাইথনে কোড ব্লক (if, for, function ইত্যাদির ভেতরের কোড) নির্ধারণ হয় ইন্ডেন্টেশন (স্পেস/ট্যাব) দিয়ে — কার্লি ব্রেস <code>{}</code> লাগে না। সাধারণত ৪ স্পেস ব্যবহার করা হয়।</p>
+<pre><code>if True:
+    print("এই লাইন if ব্লকের ভেতরে")
+    print("এটাও")
+print("এটা if ব্লকের বাইরে")</code></pre>
+<h3>print() ফাংশন</h3>
+<pre><code>print("Hello", "World")                    <span class="cmt"># আউটপুট: Hello World</span>
+print("Hello", "World", sep="-")            <span class="cmt"># আউটপুট: Hello-World</span>
+print("Hello", end=" ")                     <span class="cmt"># নতুন লাইনে যাবে না, স্পেস দিয়ে শেষ হবে</span>
+print("A", "B", "C", sep=", ", end="!\n")   <span class="cmt"># আউটপুট: A, B, C!</span></code></pre>
+<h3>input() ফাংশন</h3>
+<pre><code>name = input("তোমার নাম লেখো: ")      <span class="cmt"># ইউজার থেকে ইনপুট নেয়, সবসময় string রিটার্ন করে</span>
+age = int(input("বয়স লেখো: "))        <span class="cmt"># সংখ্যা নিতে হলে int()/float() দিয়ে কনভার্ট করতে হয়</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="01.html"><span class="dir">← আগের অধ্যায়</span>০১ পাইথন পরিচিতি ও ইতিহাস</a>
+        <a class="next" href="03.html"><span class="dir">পরের অধ্যায় →</span>০৩ ভ্যারিয়েবল ও ডেটা টাইপ</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

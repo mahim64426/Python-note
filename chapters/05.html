@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>০৫ সব ধরনের অপারেটর — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,11 +48,11 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
-<li><a href="../chapters/05.html" data-title="০৫ সব ধরনের অপারেটর"><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
+<li><a href="../chapters/05.html" data-title="০৫ সব ধরনের অপারেটর" class="active"><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
 <li><a href="../chapters/06.html" data-title="০৬ স্ট্রিং (string)"><span class="toc-num">০৬</span>স্ট্রিং (String)</a></li>
 <li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
 <li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
@@ -93,26 +93,46 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s5">
+<h2><span class="chnum">০৫</span> সব ধরনের অপারেটর</h2>
+<h3>৫.১ তুলনা অপারেটর — ফলাফল সবসময় bool</h3>
+<pre><code>print(5 == 5)       <span class="cmt"># True</span>
+print(5 != 3)       <span class="cmt"># True</span>
+print(3 &lt; 1 &lt; 5)    <span class="cmt"># True — চেইনড কম্পারিজন</span></code></pre>
+<h3>৫.২ লজিক্যাল অপারেটর</h3>
+<pre><code>print(True and False)   <span class="cmt"># False</span>
+print(True or False)    <span class="cmt"># True</span>
+print(not True)         <span class="cmt"># False</span></code></pre>
+<h3>৫.৩ বিটওয়াইজ অপারেটর</h3>
+<table>
+<tr><th>অপারেটর</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>&amp;</code></td><td>AND</td><td><code>5 &amp; 3 =&gt; 1</code></td></tr>
+<tr><td><code>|</code></td><td>OR</td><td><code>5 | 3 =&gt; 7</code></td></tr>
+<tr><td><code>^</code></td><td>XOR</td><td><code>5 ^ 3 =&gt; 6</code></td></tr>
+<tr><td><code>~</code></td><td>NOT</td><td><code>~5 =&gt; -6</code></td></tr>
+<tr><td><code>&lt;&lt;</code></td><td>লেফট শিফট</td><td><code>5 &lt;&lt; 1 =&gt; 10</code></td></tr>
+<tr><td><code>&gt;&gt;</code></td><td>রাইট শিফট</td><td><code>5 &gt;&gt; 1 =&gt; 2</code></td></tr>
+</table>
+<h3>৫.৪ আইডেন্টিটি অপারেটর</h3>
+<p><code>is</code> ও <code>is not</code> দুই ভ্যারিয়েবল একই মেমোরি লোকেশনে আছে কিনা তা চেক করে (ভ্যালু সমান কিনা তা <code>==</code> চেক করে)।</p>
+<pre><code>a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a == b)       <span class="cmt"># True (ভ্যালু সমান)</span>
+print(a is b)       <span class="cmt"># False (আলাদা অবজেক্ট)</span>
+print(a is c)       <span class="cmt"># True (একই অবজেক্ট)</span></code></pre>
+<h3>৫.৫ মেম্বারশিপ অপারেটর</h3>
+<pre><code>s = 'spam'
+print(s in 'I saw spamalot!')       <span class="cmt"># True</span>
+print(3 in [1, 2, 3])               <span class="cmt"># True</span>
+print('a' in {'a': 1, 'b': 2})      <span class="cmt"># True — dict-এ key চেক করে</span></code></pre>
+<h3>৫.৬ ওয়ালরাস অপারেটর <code>:=</code> (Python 3.8+)</h3>
+<pre><code>if (n := len([1, 2, 3, 4])) &gt; 3:
+    print(f"লিস্টের সাইজ {n}, যা 3 এর চেয়ে বড়")</code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="04.html"><span class="dir">← আগের অধ্যায়</span>০৪ সংখ্যা ও গাণিতিক অপারেটর</a>
+        <a class="next" href="06.html"><span class="dir">পরের অধ্যায় →</span>০৬ স্ট্রিং (String)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

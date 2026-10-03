@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>০৮ লিস্ট (List) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,14 +48,14 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
 <li><a href="../chapters/05.html" data-title="০৫ সব ধরনের অপারেটর"><span class="toc-num">০৫</span>সব ধরনের অপারেটর</a></li>
 <li><a href="../chapters/06.html" data-title="০৬ স্ট্রিং (string)"><span class="toc-num">০৬</span>স্ট্রিং (String)</a></li>
 <li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
-<li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
+<li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)" class="active"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
 <li><a href="../chapters/09.html" data-title="০৯ টাপল (tuple)"><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
 <li><a href="../chapters/10.html" data-title="১০ সেট (set)"><span class="toc-num">১০</span>সেট (Set)</a></li>
 <li><a href="../chapters/11.html" data-title="১১ ডিকশনারি (dictionary)"><span class="toc-num">১১</span>ডিকশনারি (Dictionary)</a></li>
@@ -93,26 +93,61 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s8">
+<h2><span class="chnum">০৮</span> লিস্ট (List)</h2>
+<p>লিস্ট হলো অর্ডারড, মিউটেবল (পরিবর্তনযোগ্য) এবং ডুপ্লিকেট ভ্যালু রাখা যায় এমন একটি কালেকশন।</p>
+<pre><code>li1 = []                       <span class="cmt"># খালি লিস্ট</span>
+li2 = [4, 5, 6]
+li3 = list((1, 2, 3))          <span class="cmt"># টাপল থেকে লিস্ট</span>
+li4 = list(range(1, 11))       <span class="cmt"># =&gt; [1, 2, ..., 10]</span></code></pre>
+<h3>অ্যাক্সেস, ইনডেক্সিং ও স্লাইসিং</h3>
+<pre><code>a = ['spam', 'egg', 'bacon', 'tomato', 'ham', 'lobster']
+print(a[2:5])    <span class="cmt"># ['bacon', 'tomato', 'ham']</span>
+print(a[::2])    <span class="cmt"># প্রতি ২ পদক্ষেপে</span>
+print(a[::-1])   <span class="cmt"># রিভার্স লিস্ট</span></code></pre>
+<h3>লিস্টের মেথডসমূহ</h3>
+<table>
+<tr><th>মেথড</th><th>কাজ</th></tr>
+<tr><td><code>.append(x)</code></td><td>শেষে একটি আইটেম যোগ করে</td></tr>
+<tr><td><code>.extend(iter)</code></td><td>আরেকটি iterable-এর সব আইটেম শেষে যোগ করে</td></tr>
+<tr><td><code>.insert(i, x)</code></td><td>নির্দিষ্ট ইনডেক্সে আইটেম বসায়</td></tr>
+<tr><td><code>.remove(x)</code></td><td>প্রথম যে x পাবে সেটা মুছে</td></tr>
+<tr><td><code>.pop(i)</code></td><td>নির্দিষ্ট ইনডেক্সের আইটেম মুছে ও রিটার্ন করে</td></tr>
+<tr><td><code>.sort()</code> / <code>.reverse()</code></td><td>ইন-প্লেস সর্ট / উল্টানো</td></tr>
+<tr><td><code>.index(x)</code> / <code>.count(x)</code></td><td>প্রথম ইনডেক্স / কতবার আছে</td></tr>
+<tr><td><code>.copy()</code></td><td>শ্যালো কপি বানায়</td></tr>
+</table>
+<pre><code>li = [3, 1, 3, 2, 5]
+li.sort()
+print(li)              <span class="cmt"># [1, 2, 3, 3, 5]</span>
+
+odd = [1, 3, 5]
+odd.extend([9, 11, 13])   <span class="cmt"># [1, 3, 5, 9, 11, 13]</span></code></pre>
+<h3>sorted() বনাম .sort()</h3>
+<pre><code>li = [3, 1, 2]
+new_li = sorted(li)   <span class="cmt"># নতুন সর্টেড লিস্ট রিটার্ন করে, মূল li অপরিবর্তিত থাকে</span>
+li.sort()              <span class="cmt"># মূল লিস্টকেই সর্ট করে ফেলে (in-place), None রিটার্ন করে</span>
+
+words = ["banana", "kiwi", "apple"]
+words.sort(key=len)    <span class="cmt"># দৈর্ঘ্য অনুসারে সর্ট</span></code></pre>
+<h3>ফিল্টার ও কম্প্রিহেনশন দিয়ে লিস্ট জেনারেট</h3>
+<pre><code>print(list(filter(lambda x: x % 2 == 1, range(1, 20))))
+print([x ** 2 for x in range(1, 11) if x % 2 == 1])   <span class="cmt"># [1, 9, 25, 49, 81]</span></code></pre>
+<h3>নেস্টেড লিস্ট (Matrix)</h3>
+<pre><code>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(matrix[1][2])   <span class="cmt"># 6</span>
+
+grid = [[0] * 3 for _ in range(3)]   <span class="cmt"># সঠিক উপায়ে 2D লিস্ট তৈরি</span></code></pre>
+<h3>শ্যালো বনাম ডিপ কপি</h3>
+<pre><code>import copy
+a = [1, [2, 3]]
+b = a                    <span class="cmt"># একই অবজেক্ট, b বদলালে a-ও বদলায়</span>
+c = a.copy()              <span class="cmt"># শ্যালো কপি — ভেতরের লিস্ট এখনও শেয়ার্ড</span>
+d = copy.deepcopy(a)      <span class="cmt"># ডিপ কপি — সবকিছু সম্পূর্ণ আলাদা</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="07.html"><span class="dir">← আগের অধ্যায়</span>০৭ f-String ও স্ট্রিং ফরম্যাটিং</a>
+        <a class="next" href="09.html"><span class="dir">পরের অধ্যায় →</span>০৯ টাপল (Tuple)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

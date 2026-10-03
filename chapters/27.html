@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>২৭ Heapq (হিপ) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -74,7 +74,7 @@
 <li><a href="../chapters/24.html" data-title="২৪ কনটেক্সট ম্যানেজার (with)"><span class="toc-num">২৪</span>কনটেক্সট ম্যানেজার (with)</a></li>
 <li><a href="../chapters/25.html" data-title="২৫ কম্প্রিহেনশন"><span class="toc-num">২৫</span>কম্প্রিহেনশন</a></li>
 <li><a href="../chapters/26.html" data-title="২৬ collections মডিউল"><span class="toc-num">২৬</span>Collections মডিউল</a></li>
-<li><a href="../chapters/27.html" data-title="২৭ heapq (হিপ)"><span class="toc-num">২৭</span>Heapq (হিপ)</a></li>
+<li><a href="../chapters/27.html" data-title="২৭ heapq (হিপ)" class="active"><span class="toc-num">২৭</span>Heapq (হিপ)</a></li>
 <li><a href="../chapters/28.html" data-title="২৮ stack ও queue"><span class="toc-num">২৮</span>Stack ও Queue</a></li>
 <li><a href="../chapters/29.html" data-title="২৯ রেগুলার এক্সপ্রেশন (re)"><span class="toc-num">২৯</span>রেগুলার এক্সপ্রেশন (re)</a></li>
 <li><a href="../chapters/30.html" data-title="৩০ তারিখ ও সময় (datetime)"><span class="toc-num">৩০</span>তারিখ ও সময় (datetime)</a></li>
@@ -93,26 +93,22 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s27">
+<h2><span class="chnum">২৭</span> Heapq (হিপ)</h2>
+<p>হিপ হলো এমন একটি বাইনারি ট্রি যেখানে প্রতিটি প্যারেন্ট নোডের ভ্যালু তার চাইল্ড নোডের চেয়ে ছোট বা সমান — সবচেয়ে ছোট/বড় ভ্যালু দ্রুত পাওয়ার জন্য কাজে লাগে।</p>
+<pre><code>import heapq
+myList = [9, 5, 4, 1, 3, 2]
+heapq.heapify(myList)          <span class="cmt"># Min Heap-এ কনভার্ট</span>
+print(myList[0])               <span class="cmt"># 1 — সবসময় সবচেয়ে ছোট ভ্যালুটাই থাকে প্রথমে</span>
+heapq.heappush(myList, 10)
+x = heapq.heappop(myList)
+
+print(heapq.nlargest(3, [5, 1, 8, 3, 9]))    <span class="cmt"># [9, 8, 5]</span>
+print(heapq.nsmallest(2, [5, 1, 8, 3, 9]))   <span class="cmt"># [1, 3]</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="26.html"><span class="dir">← আগের অধ্যায়</span>২৬ Collections মডিউল</a>
+        <a class="next" href="28.html"><span class="dir">পরের অধ্যায় →</span>২৮ Stack ও Queue</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

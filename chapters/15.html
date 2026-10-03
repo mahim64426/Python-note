@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>১৫ ফাংশন (Function) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -62,7 +62,7 @@
 <li><a href="../chapters/12.html" data-title="১২ টাইপ কাস্টিং / কনভার্শন"><span class="toc-num">১২</span>টাইপ কাস্টিং / কনভার্শন</a></li>
 <li><a href="../chapters/13.html" data-title="১৩ কন্ডিশনাল স্টেটমেন্ট"><span class="toc-num">১৩</span>কন্ডিশনাল স্টেটমেন্ট</a></li>
 <li><a href="../chapters/14.html" data-title="১৪ লুপ (loop)"><span class="toc-num">১৪</span>লুপ (Loop)</a></li>
-<li><a href="../chapters/15.html" data-title="১৫ ফাংশন (function)"><span class="toc-num">১৫</span>ফাংশন (Function)</a></li>
+<li><a href="../chapters/15.html" data-title="১৫ ফাংশন (function)" class="active"><span class="toc-num">১৫</span>ফাংশন (Function)</a></li>
 <li><a href="../chapters/16.html" data-title="১৬ lambda / অ্যানোনিমাস ফাংশন"><span class="toc-num">১৬</span>Lambda / অ্যানোনিমাস ফাংশন</a></li>
 <li><a href="../chapters/17.html" data-title="১৭ মডিউল ও প্যাকেজ"><span class="toc-num">১৭</span>মডিউল ও প্যাকেজ</a></li>
 <li><a href="../chapters/18.html" data-title="১৮ ফাইল হ্যান্ডলিং"><span class="toc-num">১৮</span>ফাইল হ্যান্ডলিং</a></li>
@@ -93,26 +93,83 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
-<ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
-</ul>
+      <section class="chapter" id="s15">
+<h2><span class="chnum">১৫</span> ফাংশন (Function)</h2>
+<pre><code>def hello_world():
+    print('Hello, World!')
+
+hello_world()
+
+def add(x, y):
+    return x + y
+
+result = add(5, 6)   <span class="cmt"># 11</span></code></pre>
+<h3>ডকস্ট্রিং ও ডিফল্ট ভ্যালু আর্গুমেন্ট</h3>
+<pre><code>def square(n):
+    """এই ফাংশন একটি সংখ্যার বর্গ রিটার্ন করে।"""
+    return n * n
+
+def add(x, y=10):
+    return x + y
+
+print(add(5))        <span class="cmt"># 15</span>
+print(add(5, 20))    <span class="cmt"># 25</span></code></pre>
+<h3>*args ও **kwargs</h3>
+<pre><code>def varargs(*args):
+    return args
+print(varargs(1, 2, 3))   <span class="cmt"># (1, 2, 3) — টাপল হিসেবে</span>
+
+def keyword_args(**kwargs):
+    return kwargs
+print(keyword_args(big="foot", loch="ness"))   <span class="cmt"># {'big': 'foot', 'loch': 'ness'}</span>
+
+def full_example(a, b, *args, c=10, **kwargs):
+    print(a, b, args, c, kwargs)
+full_example(1, 2, 3, 4, c=100, x=1, y=2)
+<span class="cmt"># 1 2 (3, 4) 100 {'x': 1, 'y': 2}</span></code></pre>
+<h3>Positional-only ও Keyword-only আর্গুমেন্ট (Python 3.8+)</h3>
+<pre><code>def func(a, b, /, c, d, *, e, f):
+    <span class="cmt"># a, b → শুধু পজিশনাল</span>
+    <span class="cmt"># c, d → পজিশনাল বা কিওয়ার্ড দুভাবেই</span>
+    <span class="cmt"># e, f → শুধু কিওয়ার্ড</span>
+    pass
+
+func(1, 2, 3, d=4, e=5, f=6)   <span class="cmt"># ✅ বৈধ</span></code></pre>
+<h3>রিকার্শন ও ক্লোজার</h3>
+<pre><code>def factorial(n):
+    if n &lt;= 1:
+        return 1
+    return n * factorial(n - 1)
+print(factorial(5))   <span class="cmt"># 120</span>
+
+def outer(x):
+    def inner(y):
+        return x + y   <span class="cmt"># বাইরের ফাংশনের 'x' এখানে অ্যাক্সেস করা যাচ্ছে</span>
+    return inner
+
+add_five = outer(5)
+print(add_five(3))    <span class="cmt"># 8</span></code></pre>
+<h3>global ও nonlocal কীওয়ার্ড</h3>
+<pre><code>counter = 0
+def increment():
+    global counter
+    counter += 1
+
+def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        x += 1
+    inner()
+    return x
+print(outer())   <span class="cmt"># 11</span></code></pre>
+<h3>টাইপ হিন্ট সহ ফাংশন</h3>
+<pre><code>def add(x: int, y: int) -> int:
+    return x + y</code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="14.html"><span class="dir">← আগের অধ্যায়</span>১৪ লুপ (Loop)</a>
+        <a class="next" href="16.html"><span class="dir">পরের অধ্যায় →</span>১৬ Lambda / অ্যানোনিমাস ফাংশন</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

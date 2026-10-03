@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>০৯ টাপল (Tuple) — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -56,7 +56,7 @@
 <li><a href="../chapters/06.html" data-title="০৬ স্ট্রিং (string)"><span class="toc-num">০৬</span>স্ট্রিং (String)</a></li>
 <li><a href="../chapters/07.html" data-title="০৭ f-string ও স্ট্রিং ফরম্যাটিং"><span class="toc-num">০৭</span>f-String ও স্ট্রিং ফরম্যাটিং</a></li>
 <li><a href="../chapters/08.html" data-title="০৮ লিস্ট (list)"><span class="toc-num">০৮</span>লিস্ট (List)</a></li>
-<li><a href="../chapters/09.html" data-title="০৯ টাপল (tuple)"><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
+<li><a href="../chapters/09.html" data-title="০৯ টাপল (tuple)" class="active"><span class="toc-num">০৯</span>টাপল (Tuple)</a></li>
 <li><a href="../chapters/10.html" data-title="১০ সেট (set)"><span class="toc-num">১০</span>সেট (Set)</a></li>
 <li><a href="../chapters/11.html" data-title="১১ ডিকশনারি (dictionary)"><span class="toc-num">১১</span>ডিকশনারি (Dictionary)</a></li>
 <li><a href="../chapters/12.html" data-title="১২ টাইপ কাস্টিং / কনভার্শন"><span class="toc-num">১২</span>টাইপ কাস্টিং / কনভার্শন</a></li>
@@ -93,26 +93,31 @@
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
+      <section class="chapter" id="s9">
+<h2><span class="chnum">০৯</span> টাপল (Tuple)</h2>
+<p>টাপল লিস্টের মতোই, কিন্তু <b>ইমিউটেবল</b> (অপরিবর্তনযোগ্য) — একবার তৈরি হলে এর ভেতরের ভ্যালু বদলানো যায় না।</p>
+<pre><code>my_tuple = (1, 2, 3)
+single = (5,)   <span class="cmt"># একমাত্র আইটেমের টাপল হলে কমা লাগবে, নাহলে এটা int হয়ে যাবে</span></code></pre>
+<h3>টাপল আনপ্যাকিং</h3>
+<pre><code>point = (1, 2, 3)
+x, y, z = point
+a, *rest = (1, 2, 3, 4)   <span class="cmt"># a=1, rest=[2, 3, 4]</span></code></pre>
+<h3>কেন টাপল ব্যবহার করবেন</h3>
 <ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
+<li>ইমিউটেবল হওয়ায় ডেটা প্রোটেক্টেড থাকে, ভুলে বদলে যাওয়ার সুযোগ থাকে না।</li>
+<li>লিস্টের তুলনায় সামান্য দ্রুত ও কম মেমোরি লাগে।</li>
+<li>ডিকশনারির key হিসেবে ব্যবহার করা যায় (লিস্ট করা যায় না)।</li>
 </ul>
+<pre><code>locations = {(0, 0): "origin", (1, 1): "point A"}</code></pre>
+<h3>namedtuple</h3>
+<pre><code>from collections import namedtuple
+Point = namedtuple("Point", ["x", "y"])
+p = Point(3, 4)
+print(p.x, p.y)   <span class="cmt"># 3 4</span></code></pre>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="08.html"><span class="dir">← আগের অধ্যায়</span>০৮ লিস্ট (List)</a>
+        <a class="next" href="10.html"><span class="dir">পরের অধ্যায় →</span>১০ সেট (Set)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">

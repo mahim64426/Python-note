@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>০১ পাইথন পরিচিতি ও ইতিহাস — পাইথন চিট শিট</title>
+<title>৩৯ PEP 8 কোডিং স্টাইল গাইড — পাইথন চিট শিট</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
   <nav class="sidebar" id="sidebar">
     <input type="text" class="toc-search" id="tocSearch" placeholder="সূচিপত্রে খুঁজুন...">
     <ul class="toc-list" id="tocList">
-      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস" class="active"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
+      <li><a href="../chapters/01.html" data-title="০১ পাইথন পরিচিতি ও ইতিহাস"><span class="toc-num">০১</span>পাইথন পরিচিতি ও ইতিহাস</a></li>
 <li><a href="../chapters/02.html" data-title="০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট"><span class="toc-num">০২</span>কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a></li>
 <li><a href="../chapters/03.html" data-title="০৩ ভ্যারিয়েবল ও ডেটা টাইপ"><span class="toc-num">০৩</span>ভ্যারিয়েবল ও ডেটা টাইপ</a></li>
 <li><a href="../chapters/04.html" data-title="০৪ সংখ্যা ও গাণিতিক অপারেটর"><span class="toc-num">০৪</span>সংখ্যা ও গাণিতিক অপারেটর</a></li>
@@ -86,33 +86,30 @@
 <li><a href="../chapters/36.html" data-title="৩৬ virtual environment ও pip"><span class="toc-num">৩৬</span>Virtual Environment ও pip</a></li>
 <li><a href="../chapters/37.html" data-title="৩৭ ইউনিট টেস্টিং"><span class="toc-num">৩৭</span>ইউনিট টেস্টিং</a></li>
 <li><a href="../chapters/38.html" data-title="৩৮ ডিবাগিং প্র্যাকটিস"><span class="toc-num">৩৮</span>ডিবাগিং প্র্যাকটিস</a></li>
-<li><a href="../chapters/39.html" data-title="৩৯ pep 8 কোডিং স্টাইল গাইড"><span class="toc-num">৩৯</span>PEP 8 কোডিং স্টাইল গাইড</a></li>
+<li><a href="../chapters/39.html" data-title="৩৯ pep 8 কোডিং স্টাইল গাইড" class="active"><span class="toc-num">৩৯</span>PEP 8 কোডিং স্টাইল গাইড</a></li>
 <li><a href="../chapters/40.html" data-title="৪০ বিবিধ (miscellaneous)"><span class="toc-num">৪০</span>বিবিধ (Miscellaneous)</a></li>
 <li><a href="../chapters/41.html" data-title="৪১ কুইক রেফারেন্স টেবিল"><span class="toc-num">৪১</span>কুইক রেফারেন্স টেবিল</a></li>
     </ul>
   </nav>
   <main>
     <div class="content">
-      <section class="chapter" id="s1">
-<h2><span class="chnum">০১</span> পাইথন পরিচিতি ও ইতিহাস</h2>
-<p>পাইথন একটি হাই-লেভেল, ইন্টারপ্রেটেড, জেনারেল-পারপাস প্রোগ্রামিং ভাষা। এটি সহজ সিনট্যাক্স, রিডেবিলিটি এবং বিশাল লাইব্রেরি ইকোসিস্টেমের জন্য পরিচিত। ওয়েব ডেভেলপমেন্ট, ডেটা সায়েন্স, মেশিন লার্নিং, অটোমেশন, স্ক্রিপ্টিং — সব জায়গায় পাইথন ব্যবহৃত হয়।</p>
-<h3>Hello World</h3>
-<pre><code>print("Hello, World!")</code></pre>
-<h3>পাইথন রান করা</h3>
-<pre><code>python script.py    <span class="cmt"># স্ক্রিপ্ট ফাইল রান করা</span>
-python              <span class="cmt"># ইন্টারঅ্যাক্টিভ শেল (REPL) চালু করা</span>
-python -c "print(1+1)"   <span class="cmt"># সরাসরি কমান্ড রান করা</span></code></pre>
-<h3>পাইথনের বৈশিষ্ট্য</h3>
+      <section class="chapter" id="s39">
+<h2><span class="chnum">৩৯</span> PEP 8 কোডিং স্টাইল গাইড</h2>
 <ul>
-<li><b>ডায়নামিকভাবে টাইপড:</b> ভ্যারিয়েবলের টাইপ আগে থেকে ঘোষণা করতে হয় না।</li>
-<li><b>ইন্টারপ্রেটেড:</b> কোড লাইন বাই লাইন এক্সিকিউট হয়, কম্পাইল করার প্রয়োজন নেই।</li>
-<li><b>হোয়াইটস্পেস-সেনসিটিভ:</b> কোড ব্লক নির্ধারণে ইন্ডেন্টেশন ব্যবহৃত হয়, <code>{}</code> লাগে না।</li>
-<li><b>মাল্টি-প্যারাডাইম:</b> প্রসিডিউরাল, অবজেক্ট-ওরিয়েন্টেড এবং ফাংশনাল — তিন ধরনের স্টাইলেই কোড লেখা যায়।</li>
+<li>ইন্ডেন্টেশনে ৪ স্পেস ব্যবহার করুন (ট্যাব নয়)।</li>
+<li>প্রতি লাইন সর্বোচ্চ ৭৯ ক্যারেক্টারের মধ্যে রাখা ভালো।</li>
+<li>ভ্যারিয়েবল/ফাংশনের নাম: <code>snake_case</code></li>
+<li>ক্লাসের নাম: <code>PascalCase</code></li>
+<li>কনস্ট্যান্টের নাম: <code>UPPER_CASE</code></li>
+<li>অপারেটরের চারপাশে স্পেস দিন: <code>x = 1 + 2</code> (না লিখে <code>x=1+2</code>)</li>
+<li>ফাংশন/ক্লাসের মধ্যে ২টি খালি লাইন রাখা ভালো।</li>
+<li>ইমপোর্ট সবসময় ফাইলের শুরুতে লিখুন।</li>
+<li>অর্থবহ নাম দিন (যেমন <code>user_count</code>, শুধু <code>x</code> না লিখে)।</li>
 </ul>
 </section>
       <div class="chapter-nav">
-        <a class="disabled" href="#"></a>
-        <a class="next" href="02.html"><span class="dir">পরের অধ্যায় →</span>০২ কমেন্ট, ইন্ডেন্টেশন, প্রিন্ট ও ইনপুট</a>
+        <a class="prev" href="38.html"><span class="dir">← আগের অধ্যায়</span>৩৮ ডিবাগিং প্র্যাকটিস</a>
+        <a class="next" href="40.html"><span class="dir">পরের অধ্যায় →</span>৪০ বিবিধ (Miscellaneous)</a>
       </div>
       <div class="back-toc-wrap">
         <a class="back-toc-btn" href="../index.html">
